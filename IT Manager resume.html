@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>พอร์ตโฟลิโอ IT Manager</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --light-text: #6b7280;
+            --bg-color: #f9fafb;
+            --white: #ffffff;
+            --section-bg: #f3f4f6;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', 'Sarabun', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Import Thai fonts from Google */
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap');
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        
+        .name {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav {
+            background-color: var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            border-color: var(--white);
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        /* About Section */
+        .about-content {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skill-category {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .skill-category h3 {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .skills-list {
+            list-style: none;
+        }
+        
+        .skills-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skills-list li:before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        /* Experience Section */
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+        
+        .timeline-content {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-company {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-date {
+            font-style: italic;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-description ul {
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-description li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievements-list {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .achievements-list strong {
+            color: var(--secondary-color);
+        }
+        
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .education-item {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .education-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .education-school {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .education-year {
+            font-style: italic;
+            color: var(--light-text);
+        }
+        
+        /* Certifications Section */
+        .certifications-list {
+            list-style: none;
+        }
+        
+        .certification-item {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 1rem;
+        }
+        
+        .certification-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .certification-org {
+            font-weight: 500;
+        }
+        
+        .certification-year {
+            font-style: italic;
+            color: var(--light-text);
+        }
+        
+        /* Projects Section */
+        .projects-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+            
+            .name {
+                font-size: 1.8rem;
+            }
+            
+            .title {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="home">
+        <div class="header-container">
+            <img src="https://drive.google.com/uc?export=view&id=1UduoszSsxyHjiKXqAMJOvByZr6jKzy_W" alt="โปรไฟล์" class="profile-img">
+            <h1 class="name">สกลวรรธน์ สิริรัตนาธรสกุล</h1>
+            <h2 class="title">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ (IT Manager)</h2>
+            <p>ผู้เชี่ยวชาญด้านเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปี ในการพัฒนาระบบ ERP, Mobile Application และ Automation Solutions</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                    </svg>
+                    <span>mzm.sakolwat@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                    </svg>
+                    <span>080-965-6596</span>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                    </svg>
+                    <span>ปทุมธานี, ประเทศไทย</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#home" class="active">หน้าหลัก</a></li>
+                <li><a href="#about">เกี่ยวกับฉัน</a></li>
+                <li><a href="#skills">ทักษะ</a></li>
+                <li><a href="#experience">ประสบการณ์</a></li>
+                <li><a href="#education">การศึกษา</a></li>
+                <li><a href="#certifications">ประกาศนียบัตร</a></li>
+                <li><a href="#projects">ผลงาน</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2 class="section-title">เกี่ยวกับฉัน</h2>
+            <div class="about-content">
+                <p>ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปีในวงการไอที เชี่ยวชาญในการวางแผนกลยุทธ์ด้านเทคโนโลยีสารสนเทศ การบริหารโครงการ และการพัฒนาแอปพลิเคชันเพื่อตอบสนองความต้องการทางธุรกิจ</p>
+                <p>มีความเชี่ยวชาญในการติดตั้งและบริหารจัดการระบบ ERP ชั้นนำอย่าง SAP Business One และ Microsoft Dynamics 365 รวมถึงการพัฒนาแอปพลิเคชันสำหรับระบบอนุมัติเอกสารและระบบอัตโนมัติเพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร</p>
+                <p>มีความสามารถในการสื่อสารและถ่ายทอดความรู้ด้านเทคโนโลยีให้กับผู้ใช้งานทุกระดับ รวมถึงความคิดสร้างสรรค์ในการนำเสนอข้อมูลและการแก้ไขปัญหาที่ซับซ้อน</p>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <h2 class="section-title">ทักษะความสามารถ</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>การพัฒนาระบบ</h3>
+                    <ul class="skills-list">
+                        <li>พัฒนา Mobile Application และระบบ Automation</li>
+                        <li>ระบบอนุมัติเอกสาร (Approval Workflow)</li>
+                        <li>ระบบงาน Paperless</li>
+                        <li>ระบบแจ้งเตือนอัตโนมัติ</li>
+                        <li>Google Script Development</li>
+                        <li>Crystal Report Development</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>ระบบ ERP</h3>
+                    <ul class="skills-list">
+                        <li>SAP Business One - Implementation & Support</li>
+                        <li>Microsoft Dynamics 365 - Implementation & Support</li>
+                        <li>SQL Query & Reporting</li>
+                        <li>Business Process Analysis</li>
+                        <li>System Integration</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>การวิเคราะห์ข้อมูล</h3>
+                    <ul class="skills-list">
+                        <li>Microsoft Power BI</li>
+                        <li>Advanced Excel (Pivot, Power Query)</li>
+                        <li>Data Analytics for Business</li>
+                        <li>Reporting & Dashboard Creation</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>การบริหารจัดการ</h3>
+                    <ul class="skills-list">
+                        <li>IT Strategy Planning</li>
+                        <li>Team Management</li>
+                        <li>Project Management</li>
+                        <li>Budget Planning</li>
+                        <li>Resource Allocation</li>
+                        <li>IT Training & Development</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>ทักษะพิเศษ</h3>
+                    <ul class="skills-list">
+                        <li>Video Editing & Production</li>
+                        <li>Presentation & Public Speaking</li>
+                        <li>Training & Workshop Facilitation</li>
+                        <li>Event MC</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>ทักษะเพิ่มเติม</h3>
+                    <ul class="skills-list">
+                        <li>ISO 9001:2015 Standards</li>
+                        <li>GMP Standards</li>
+                        <li>IT Security Policy Development</li>
+                        <li>First Aid & Emergency Response</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <h2 class="section-title">ประสบการณ์การทำงาน</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</h3>
+                        <div class="timeline-company">บริษัท ขายยา เพ็ญภาค จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date">กรกฎาคม 2564 - ปัจจุบัน</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>กำหนดกลยุทธ์และแผนงานด้านเทคโนโลยีสารสนเทศให้สอดคล้องกับวิสัยทัศน์และเป้าหมายทางธุรกิจขององค์กร</li>
+                                <li>บริหารจัดการงบประมาณด้าน IT และนำเสนอแผนการลงทุนโครงการต่างๆ ต่อผู้บริหารระดับสูง</li>
+                                <li>ควบคุมดูแลและประเมินผลการดำเนินงานด้านเทคโนโลยีสารสนเทศและระบบข้อมูลอิเล็กทรอนิกส์ทั้งหมดในองค์กร</li>
+                                <li>พัฒนาและปรับปรุงนโยบายด้านเทคโนโลยีสารสนเทศให้ทันสมัย สอดคล้องกับมาตรฐานสากลและข้อกำหนดทางกฎหมาย</li>
+                            </ul>
+                            
+                            <ul class="achievements-list">
+                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบ Automation และ Mobile Application สำหรับการอนุมัติเอกสารและระบบแจ้งเตือนต่างๆ ทำให้ลดการใช้กระดาษภายในองค์กรได้มากกว่า 50%</li>
+                                <li><strong>ผลงานสำคัญ:</strong> ปรับปรุงระบบความปลอดภัยของข้อมูลองค์กรให้สอดคล้องกับมาตรฐาน ISO และข้อกำหนดทางกฎหมาย</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">IT Supervisor</h3>
+                        <div class="timeline-company">บริษัท ซีแอลพี บิซิเนส แมเนจเมนท์ จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date">พฤษภาคม 2562 - มิถุนายน 2564</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>บริหารโครงการ Implementation ระบบ ERP (Microsoft Dynamics AX D365) และดูแลการปรับปรุงระบบอย่างต่อเนื่อง</li>
+                                <li>ให้คำปรึกษาและแก้ไขปัญหาที่ซับซ้อนเกี่ยวกับระบบ ERP (Microsoft Dynamics AX D365 และ SAP Business One)</li>
+                                <li>จัดทำและบริหารแผนงานด้านไอทีให้สอดคล้องกับ KPI และมาตรฐาน ISO</li>
+                                <li>บริหารจัดการสต็อกอุปกรณ์ไอทีและวางแผนการจัดซื้อ</li>
+                            </ul>
+                            
+                            <ul class="achievements-list">
+                                <li><strong>ผลงานสำคัญ:</strong> นำทีมดำเนินการติดตั้งและปรับแต่งระบบ ERP Microsoft Dynamics AX D365 จนสำเร็จตามกำหนดเวลาและงบประมาณ</li>
+                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบ Helpdesk เพื่อเพิ่มประสิทธิภาพในการแก้ไขปัญหาด้านไอทีและติดตามผลการดำเนินงาน</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">IT Support</h3>
+                        <div class="timeline-company">มาซูม่า (ประเทศไทย) จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date">กรกฎาคม 2558 - เมษายน 2562</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>บริหารจัดการและดูแลระบบเครือข่าย รวมถึง Network, Internet, Firewall, NAS Server, Print Server ฯลฯ</li>
+                                <li>แก้ไขปัญหาและให้คำปรึกษาแก่ผู้ใช้งานในองค์กรเกี่ยวกับระบบ ERP และปัญหาด้านฮาร์ดแวร์และซอฟต์แวร์</li>
+                                <li>จัดทำและดำเนินการตามแผนงานด้านไอทีให้สอดคล้องกับ KPI และข้อกำหนดของมาตรฐาน ISO</li>
+                                <li>ออกแบบและดำเนินการฝึกอบรมพนักงานเกี่ยวกับการใช้งานคอมพิวเตอร์และโปรแกรม Microsoft Excel</li>
+                                <li>ดูแลระบบกล้องวงจรปิด การสำรองข้อมูล และการตรวจสอบภาพย้อนหลัง</li>
+                            </ul>
+                            
+                            <ul class="achievements-list">
+                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบเครือข่ายให้มีเสถียรภาพและความปลอดภัยสูงขึ้น ทำให้ลดเวลาการหยุดชะงักของระบบลงได้ 75%</li>
+                                <li><strong>ผลงานสำคัญ:</strong> ปรับปรุงระบบสำรองข้อมูลให้มีประสิทธิภาพและเชื่อถือได้มากขึ้น</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">IT Support</h3>
+                        <div class="timeline-company">เภตรา กรุ๊ป จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date">ตุลาคม 2557 - มิถุนายน 2558</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>ดูแลและบำรุงรักษาระบบเครือข่ายและคอมพิวเตอร์ทั้งหมด 441 เครื่อง ใน 10 สาขาของกลุ่มบริษัท</li>
+                                <li>ให้บริการและแก้ไขปัญหาทางด้านเทคนิคแก่ผู้ใช้งานทั่วทั้งองค์กร</li>
+                                <li>วางแผนและดำเนินการบำรุงรักษาเชิงป้องกันเพื่อให้ระบบมีความเสถียรอยู่เสมอ</li>
+                                <li>ฝึกอบรมและพัฒนาความรู้ด้านคอมพิวเตอร์และระบบสารสนเทศให้กับพนักงาน</li>
+                            </ul>
+                            
+                            <ul class="achievements-list">
+                                <li><strong>ผลงานสำคัญ:</strong> บริหารจัดการระบบเครือข่ายและคอมพิวเตอร์ 10 สาขาอย่างมีประสิทธิภาพ แม้มีทรัพยากรบุคคลจำกัด</li>
+                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาชุดคู่มือการใช้งานระบบสารสนเทศเพื่อให้ผู้ใช้งานสามารถแก้ไขปัญหาเบื้องต้นได้ด้วยตนเอง</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <h2 class="section-title">การศึกษา</h2>
+            <div class="education-grid">
+                <div class="education-item">
+                    <h3 class="education-title">วิทยาศาสตรบัณฑิต (วท.บ.)</h3>
+                    <div class="education-school">มหาวิทยาลัยราชภัฏสวนดุสิต</div>
+                    <div class="education-program">คณะวิทยาศาสตร์ สาขาวิทยาการคอมพิวเตอร์</div>
+                    <div class="education-year">2550</div>
+                </div>
+                
+                <div class="education-item">
+                    <h3 class="education-title">มัธยมศึกษาตอนปลาย</h3>
+                    <div class="education-school">โรงเรียนปทุมวิไล</div>
+                    <div class="education-year">2547</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Certifications Section -->
+        <section id="certifications" class="section">
+            <h2 class="section-title">ประกาศนียบัตรและการอบรม</h2>
+            <ul class="certifications-list">
+                <li class="certification-item">
+                    <div class="certification-title">วิเคราะห์ข้อมูลองค์กรด้วย Power BI</div>
+                    <div class="certification-org">Future Skill</div>
+                    <div class="certification-year">2566</div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="certification-title">เจาะลึกการใช้ Excel เพื่อธุรกิจแบบมืออาชีพ</div>
+                    <div class="certification-org">Future Skill</div>
+                    <div class="certification-year">2566</div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="certification-title">Data Analytics for Business</div>
+                    <div class="certification-org">Future Skill</div>
+                    <div class="certification-year">2566</div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="certification-title">ISO 9001:2015 / GMP Asian / HALAL / GMP อ.ย.</div>
+                    <div class="certification-year">2565</div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="certification-title">DMS IT Module</div>
+                    <div class="certification-org">บริษัท เมอร์เซเดส-เบนซ์ (ประเทศไทย)</div>
+                    <div class="certification-year">2558</div>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2 class="section-title">ผลงานและโครงการสำคัญ</h2>
+            <div class="projects-list">
+                <div class="project-item">
+                    <img src="/api/placeholder/400/180" alt="ระบบ Mobile Approval" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">ระบบอนุมัติเอกสารบนมือถือ</h3>
+                        <p>พัฒนาแอปพลิเคชันสำหรับการอนุมัติเอกสารต่างๆ ภายในองค์กร เช่น ใบลา ใบขอสั่งซื้อ เพื่อเพิ่มความสะดวกรวดเร็วและลดการใช้กระดาษ</p>
+                        <div class="tags">
+                            <span class="tag">Mobile App</span>
+                            <span class="tag">Paperless</span>
+                            <span class="tag">Workflow</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <img src="/api/placeholder/400/180" alt="ERP Implementation" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">การติดตั้งระบบ ERP</h3>
+                        <p>บริหารโครงการติดตั้งและปรับแต่งระบบ ERP (Microsoft Dynamics 365) เพื่อเชื่อมโยงข้อมูลและกระบวนการทำงานทั้งหมดขององค์กร</p>
+                        <div class="tags">
+                            <span class="tag">ERP</span>
+                            <span class="tag">Microsoft Dynamics</span>
+                            <span class="tag">Business Process</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <img src="/api/placeholder/400/180" alt="Automated Notification System" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">ระบบแจ้งเตือนอัตโนมัติ</h3>
+                        <p>พัฒนาระบบแจ้งเตือนอัตโนมัติสำหรับการติดตามวันหมดอายุของผลิตภัณฑ์ยา การต่ออายุใบอนุญาต และกำหนดการสำคัญต่างๆ</p>
+                        <div class="tags">
+                            <span class="tag">Automation</span>
+                            <span class="tag">Notification</span>
+                            <span class="tag">Compliance</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <img src="/api/placeholder/400/180" alt="Network Infrastructure" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">การปรับปรุงโครงสร้างพื้นฐานเครือข่าย</h3>
+                        <p>วางแผนและดำเนินการปรับปรุงโครงสร้างพื้นฐานด้านเครือข่ายขององค์กร เพื่อรองรับการเติบโตและเพิ่มความปลอดภัยของข้อมูล</p>
+                        <div class="tags">
+                            <span class="tag">Network</span>
+                            <span class="tag">Security</span>
+                            <span class="tag">Infrastructure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>© 2025 สกลวรรธน์ สิริรัตนาธรสกุล - ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</p>
+            <p>พร้อมที่จะนำความรู้และประสบการณ์มาพัฒนาองค์กรของคุณ</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple navigation highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if(pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
