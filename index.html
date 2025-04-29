@@ -93,7 +93,7 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             padding: 0.5rem 1rem;
         }
         
@@ -101,7 +101,6 @@
             display: flex;
             gap: 1.5rem;
             list-style: none;
-            align-items: center;
         }
         
         .nav-links a {
@@ -115,41 +114,6 @@
         
         .nav-links a:hover, .nav-links a.active {
             border-color: var(--white);
-        }
-        
-        /* Language Switch Styles */
-        .lang-switch {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .lang-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-            padding: 0;
-        }
-        
-        .lang-btn.active {
-            opacity: 1;
-            box-shadow: 0 0 0 2px white;
-            border-radius: 2px;
-        }
-        
-        .lang-btn:hover {
-            opacity: 1;
-        }
-        
-        .lang-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 2px;
         }
         
         /* Main Content */
@@ -452,26 +416,6 @@
             .timeline-item {
                 padding-left: 1.5rem;
             }
-            
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
-            }
-            
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .lang-switch {
-                margin-top: 0.5rem;
-            }
-        }
-        
-        /* Hide language specific content */
-        [lang="en"] {
-            display: none;
         }
     </style>
 </head>
@@ -479,22 +423,10 @@
     <!-- Header -->
     <header id="home">
         <div class="header-container">
-            <img src="https://drive.google.com/uc?export=view&id=1UduoszSsxyHjiKXqAMJOvByZr6jKzy_W" alt="โปรไฟล์" class="profile-img">
-            
-            <!-- Thai Name -->
-            <h1 class="name" lang="th">สกลวรรธน์ สิริรัตนาธรสกุล</h1>
-            <!-- English Name -->
-            <h1 class="name" lang="en">Sakolwat Sirirattanatarasakul</h1>
-            
-            <!-- Thai Title -->
-            <h2 class="title" lang="th">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ (IT Manager)</h2>
-            <!-- English Title -->
-            <h2 class="title" lang="en">Information Technology Manager</h2>
-            
-            <!-- Thai Introduction -->
-            <p lang="th">ผู้เชี่ยวชาญด้านเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปี ในการพัฒนาระบบ ERP, Mobile Application และ Automation Solutions</p>
-            <!-- English Introduction -->
-            <p lang="en">IT Professional with over 11 years of experience in ERP systems, Mobile Application Development, and Automation Solutions</p>
+            <img src="profile.png" alt="โปรไฟล์" class="profile-img">
+            <h1 class="name">สกลวรรธน์ สิริรัตนาธรสกุล</h1>
+            <h2 class="title">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ (IT Manager)</h2>
+            <p>ผู้เชี่ยวชาญด้านเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปี ในการพัฒนาระบบ ERP, Mobile Application และ Automation Solutions</p>
             
             <div class="contact-info">
                 <div class="contact-item">
@@ -513,8 +445,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                     </svg>
-                    <span lang="th">ปทุมธานี, ประเทศไทย</span>
-                    <span lang="en">Pathumthani, Thailand</span>
+                    <span>ปทุมธานี, ประเทศไทย</span>
                 </div>
             </div>
         </div>
@@ -524,22 +455,14 @@
     <nav class="nav">
         <div class="nav-container">
             <ul class="nav-links">
-                <li><a href="#home" class="active" lang="th">หน้าหลัก</a><a href="#home" class="active" lang="en">Home</a></li>
-                <li><a href="#about" lang="th">เกี่ยวกับฉัน</a><a href="#about" lang="en">About</a></li>
-                <li><a href="#skills" lang="th">ทักษะ</a><a href="#skills" lang="en">Skills</a></li>
-                <li><a href="#experience" lang="th">ประสบการณ์</a><a href="#experience" lang="en">Experience</a></li>
-                <li><a href="#education" lang="th">การศึกษา</a><a href="#education" lang="en">Education</a></li>
-                <li><a href="#certifications" lang="th">ประกาศนียบัตร</a><a href="#certifications" lang="en">Certifications</a></li>
-                <li><a href="#projects" lang="th">ผลงาน</a><a href="#projects" lang="en">Projects</a></li>
+                <li><a href="#home" class="active">หน้าหลัก</a></li>
+                <li><a href="#about">เกี่ยวกับฉัน</a></li>
+                <li><a href="#skills">ทักษะ</a></li>
+                <li><a href="#experience">ประสบการณ์</a></li>
+                <li><a href="#education">การศึกษา</a></li>
+                <li><a href="#certifications">ประกาศนียบัตร</a></li>
+                <li><a href="#projects">ผลงาน</a></li>
             </ul>
-            <div class="lang-switch">
-                <button class="lang-btn active" data-lang="th" title="ภาษาไทย">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MDAgNjAwIj48cGF0aCBmaWxsPSIjRUQxQzI0IiBkPSJNMCAwaDkwMHY2MDBIMHoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMCAxMDBoOTAwdjQwMEgweiIvPjxwYXRoIGZpbGw9IiMwMDMzQTYiIGQ9Ik0wIDIwMGg5MDB2MjAwSDB6Ii8+PC9zdmc+" alt="Thai">
-                </button>
-                <button class="lang-btn" data-lang="en" title="English">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjM1IDY1MCIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPg0KPGRlZnM+DQo8ZyBpZD0idW5pb24iPg0KPHVzZSB5PSItLjIiIHhsaW5rOmhyZWY9IiNYIi8+DQo8dXNlIHhsaW5rOmhyZWY9IiNZIi8+DQo8L2c+DQo8ZyBpZD0iWCI+DQo8cG9seWdvbiBpZD0iYSIgcG9pbnRzPSIwLDAgMCwwLjUgMSwxLjUgMSwwIi8+DQo8dXNlIHhsaW5rOmhyZWY9IiNhIiB0cmFuc2Zvcm09InNjYWxlKC0xIDEpIHRyYW5zbGF0ZSgtMiAwKSIvPg0KPC9nPg0KPGcgaWQ9IlkiPg0KPHVzZSB4bGluazpocmVmPSIjYSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwKSIvPg0KPHVzZSB4bGluazpocmVmPSIjYSIgdHJhbnNmb3JtPSJyb3RhdGUoMjQwKSIvPg0KPC9nPg0KPC9kZWZzPg0KPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEyMzUiIGhlaWdodD0iNjUwIiBmaWxsPSIjMDAyNDdkIi8+DQo8cGF0aCBkPSJNMCwwIEw2MTcuNSwzMjUgTDEyMzUsMCBMMTIzNSw2NTAgTDYxNy41LDMyNSBMMCw2NTAgeiIgZmlsbD0iI0NGMTQyQiIvPg0KPHBhdGggZD0iTTAgMCBMIDEyMzUsNjUwIE0gMTIzNSwwIEwgMCw2NTAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxMDAiLz4NCjxwYXRoIGQ9Ik02MTcuNSwwIEwgNjE3LjUsNjUwIE0gMCwzMjUgTCAxMjM1LDMyNSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE3MCIvPg0KPHBhdGggZD0iTTAgMCBMIDEyMzUsNjUwIE0gMTIzNSwwIEwgMCw2NTAgTSA2MTcuNSwwIEwgNjE3LjUsNjUwIE0gMCwzMjUgTCAxMjM1LDMyNSIgc3Ryb2tlPSIjQ0YxNDJCIiBzdHJva2Utd2lkdGg9IjcwIi8+DQo8L3N2Zz4=" alt="English">
-                </button>
-            </div>
         </div>
     </nav>
     
@@ -547,506 +470,322 @@
     <div class="main-content">
         <!-- About Section -->
         <section id="about" class="section">
-            <h2 class="section-title" lang="th">เกี่ยวกับฉัน</h2>
-            <h2 class="section-title" lang="en">About Me</h2>
+            <h2 class="section-title">เกี่ยวกับฉัน</h2>
             <div class="about-content">
-                <p lang="th">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปีในวงการไอที เชี่ยวชาญในการวางแผนกลยุทธ์ด้านเทคโนโลยีสารสนเทศ การบริหารโครงการ และการพัฒนาแอปพลิเคชันเพื่อตอบสนองความต้องการทางธุรกิจ</p>
-                <p lang="en">IT Manager with over 11 years of experience in the IT industry, specializing in IT strategy planning, project management, and application development to meet business requirements.</p>
-                
-                <p lang="th">มีความเชี่ยวชาญในการติดตั้งและบริหารจัดการระบบ ERP ชั้นนำอย่าง SAP Business One และ Microsoft Dynamics 365 รวมถึงการพัฒนาแอปพลิเคชันสำหรับระบบอนุมัติเอกสารและระบบอัตโนมัติเพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร</p>
-                <p lang="en">Expert in implementing and managing leading ERP systems such as SAP Business One and Microsoft Dynamics 365, as well as developing applications for document approval systems and automation to enhance organizational efficiency.</p>
-                
-                <p lang="th">มีความสามารถในการสื่อสารและถ่ายทอดความรู้ด้านเทคโนโลยีให้กับผู้ใช้งานทุกระดับ รวมถึงความคิดสร้างสรรค์ในการนำเสนอข้อมูลและการแก้ไขปัญหาที่ซับซ้อน</p>
-                <p lang="en">Skilled in communicating and transferring technology knowledge to users at all levels, with creative approaches to data presentation and complex problem-solving.</p>
+                <p>ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปีในวงการไอที เชี่ยวชาญในการวางแผนกลยุทธ์ด้านเทคโนโลยีสารสนเทศ การบริหารโครงการ และการพัฒนาแอปพลิเคชันเพื่อตอบสนองความต้องการทางธุรกิจ</p>
+                <p>มีความเชี่ยวชาญในการติดตั้งและบริหารจัดการระบบ ERP ชั้นนำอย่าง SAP Business One และ Microsoft Dynamics 365 รวมถึงการพัฒนาแอปพลิเคชันสำหรับระบบอนุมัติเอกสารและระบบอัตโนมัติเพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร</p>
+                <p>มีความสามารถในการสื่อสารและถ่ายทอดความรู้ด้านเทคโนโลยีให้กับผู้ใช้งานทุกระดับ รวมถึงความคิดสร้างสรรค์ในการนำเสนอข้อมูลและการแก้ไขปัญหาที่ซับซ้อน</p>
             </div>
         </section>
         
         <!-- Skills Section -->
         <section id="skills" class="section">
-            <h2 class="section-title" lang="th">ทักษะความสามารถ</h2>
-            <h2 class="section-title" lang="en">Skills</h2>
+            <h2 class="section-title">ทักษะความสามารถ</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3 lang="th">การพัฒนาระบบ</h3>
-                    <h3 lang="en">System Development</h3>
+                    <h3>การพัฒนาระบบ</h3>
                     <ul class="skills-list">
-                        <li lang="th">พัฒนา Mobile Application และระบบ Automation</li>
-                        <li lang="en">Mobile Application & Automation Systems Development</li>
-                        
-                        <li lang="th">ระบบอนุมัติเอกสาร (Approval Workflow)</li>
-                        <li lang="en">Document Approval Workflow Systems</li>
-                        
-                        <li lang="th">ระบบงาน Paperless</li>
-                        <li lang="en">Paperless Work Systems</li>
-                        
-                        <li lang="th">ระบบแจ้งเตือนอัตโนมัติ</li>
-                        <li lang="en">Automated Notification Systems</li>
-                        
-                        <li lang="th">Google Script Development</li>
-                        <li lang="en">Google Script Development</li>
-                        
-                        <li lang="th">Crystal Report Development</li>
-                        <li lang="en">Crystal Report Development</li>
+                        <li>พัฒนา Mobile Application และระบบ Automation</li>
+                        <li>ระบบอนุมัติเอกสาร (Approval Workflow)</li>
+                        <li>ระบบงาน Paperless</li>
+                        <li>ระบบแจ้งเตือนอัตโนมัติ</li>
+                        <li>Google Script Development</li>
+                        <li>Crystal Report Development</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3 lang="th">ระบบ ERP</h3>
-                    <h3 lang="en">ERP Systems</h3>
+                    <h3>ระบบ ERP</h3>
                     <ul class="skills-list">
-                        <li lang="th">SAP Business One - Implementation & Support</li>
-                        <li lang="en">SAP Business One - Implementation & Support</li>
-                        
-                        <li lang="th">Microsoft Dynamics 365 - Implementation & Support</li>
-                        <li lang="en">Microsoft Dynamics 365 - Implementation & Support</li>
-                        
-                        <li lang="th">SQL Query & Reporting</li>
-                        <li lang="en">SQL Query & Reporting</li>
-                        
-                        <li lang="th">Business Process Analysis</li>
-                        <li lang="en">Business Process Analysis</li>
-                        
-                        <li lang="th">System Integration</li>
-                        <li lang="en">System Integration</li>
+                        <li>SAP Business One - Implementation & Support</li>
+                        <li>Microsoft Dynamics 365 - Implementation & Support</li>
+                        <li>SQL Query & Reporting</li>
+                        <li>Business Process Analysis</li>
+                        <li>System Integration</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3 lang="th">การวิเคราะห์ข้อมูล</h3>
-                    <h3 lang="en">Data Analysis</h3>
+                    <h3>การวิเคราะห์ข้อมูล</h3>
                     <ul class="skills-list">
-                        <li lang="th">Microsoft Power BI</li>
-                        <li lang="en">Microsoft Power BI</li>
-                        
-                        <li lang="th">Advanced Excel (Pivot, Power Query)</li>
-                        <li lang="en">Advanced Excel (Pivot, Power Query)</li>
-                        
-                        <li lang="th">Data Analytics for Business</li>
-                        <li lang="en">Data Analytics for Business</li>
-                        
-                        <li lang="th">Reporting & Dashboard Creation</li>
-                        <li lang="en">Reporting & Dashboard Creation</li>
+                        <li>Microsoft Power BI</li>
+                        <li>Advanced Excel (Pivot, Power Query)</li>
+                        <li>Data Analytics for Business</li>
+                        <li>Reporting & Dashboard Creation</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3 lang="th">การบริหารจัดการ</h3>
-                    <h3 lang="en">Management</h3>
+                    <h3>การบริหารจัดการ</h3>
                     <ul class="skills-list">
-                        <li lang="th">IT Strategy Planning</li>
-                        <li lang="en">IT Strategy Planning</li>
-                        
-                        <li lang="th">Team Management</li>
-                        <li lang="en">Team Management</li>
-                        
-                        <li lang="th">Project Management</li>
-                        <li lang="en">Project Management</li>
-                        
-                        <li lang="th">Budget Planning</li>
-                        <li lang="en">Budget Planning</li>
-                        
-                        <li lang="th">Resource Allocation</li>
-                        <li lang="en">Resource Allocation</li>
-                        
-                        <li lang="th">IT Training & Development</li>
-                        <li lang="en">IT Training & Development</li>
+                        <li>IT Strategy Planning</li>
+                        <li>Team Management</li>
+                        <li>Project Management</li>
+                        <li>Budget Planning</li>
+                        <li>Resource Allocation</li>
+                        <li>IT Training & Development</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3 lang="th">ทักษะพิเศษ</h3>
-                    <h3 lang="en">Special Skills</h3>
+                    <h3>ทักษะพิเศษ</h3>
                     <ul class="skills-list">
-                        <li lang="th">Video Editing & Production</li>
-                        <li lang="en">Video Editing & Production</li>
-                        
-                        <li lang="th">Presentation & Public Speaking</li>
-                        <li lang="en">Presentation & Public Speaking</li>
-                        
-                        <li lang="th">Training & Workshop Facilitation</li>
-                        <li lang="en">Training & Workshop Facilitation</li>
-                        
-                        <li lang="th">Event MC</li>
-                        <li lang="en">Event MC</li>
+                        <li>Video Editing & Production</li>
+                        <li>Presentation & Public Speaking</li>
+                        <li>Training & Workshop Facilitation</li>
+                        <li>Event MC</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3 lang="th">ทักษะเพิ่มเติม</h3>
-                    <h3 lang="en">Additional Skills</h3>
+                    <h3>ทักษะเพิ่มเติม</h3>
                     <ul class="skills-list">
-                        <li lang="th">ISO 9001:2015 Standards</li>
-                        <li lang="en">ISO 9001:2015 Standards</li>
-                        
-                        <li lang="th">GMP Standards</li>
-                        <li lang="en">GMP Standards</li>
-                        
-                        <li lang="th">IT Security Policy Development</li>
-                        <li lang="en">IT Security Policy Development</li>
-                        
-                        <li lang="th">First Aid & Emergency Response</li>
-                        <li lang="en">First Aid & Emergency Response</li>
+                        <li>ISO 9001:2015 Standards</li>
+                        <li>GMP Standards</li>
+                        <li>IT Security Policy Development</li>
+                        <li>First Aid & Emergency Response</li>
                     </ul>
                 </div>
             </div>
         </section>
-
- <!-- Experience Section -->
-<section id="experience" class="section">
-    <h2 class="section-title" lang="th">ประสบการณ์การทำงาน</h2>
-    <h2 class="section-title" lang="en">Work Experience</h2>
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3 class="timeline-title" lang="th">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</h3>
-                <h3 class="timeline-title" lang="en">Information Technology Manager</h3>
-                <div class="timeline-company" lang="th">บริษัท ขายยา เพ็ญภาค จำกัด | ปทุมธานี</div>
-                <div class="timeline-company" lang="en">Kaiya Penpark Co., Ltd. | Pathumthani</div>
-                <div class="timeline-date" lang="th">กรกฎาคม 2564 - ปัจจุบัน</div>
-                <div class="timeline-date" lang="en">July 2021 - Present</div>
-                <div class="timeline-description">
-                    <ul lang="th">
-                        <li>กำหนดกลยุทธ์และแผนงานด้านเทคโนโลยีสารสนเทศให้สอดคล้องกับวิสัยทัศน์และเป้าหมายทางธุรกิจขององค์กร</li>
-                        <li>บริหารจัดการงบประมาณด้าน IT และนำเสนอแผนการลงทุนโครงการต่างๆ ต่อผู้บริหารระดับสูง</li>
-                        <li>ควบคุมดูแลและประเมินผลการดำเนินงานด้านเทคโนโลยีสารสนเทศและระบบข้อมูลอิเล็กทรอนิกส์ทั้งหมดในองค์กร</li>
-                        <li>พัฒนาและปรับปรุงนโยบายด้านเทคโนโลยีสารสนเทศให้ทันสมัย สอดคล้องกับมาตรฐานสากลและข้อกำหนดทางกฎหมาย</li>
-                    </ul>
-                    
-                    <ul lang="en">
-                        <li>Develop IT strategies and plans aligned with the organization's vision and business goals</li>
-                        <li>Manage IT budgets and present investment plans for various projects to senior management</li>
-                        <li>Oversee and evaluate the performance of information technology and electronic data systems throughout the organization</li>
-                        <li>Develop and improve IT policies to stay current with international standards and legal requirements</li>
-                    </ul>
-                    
-                    <ul class="achievements-list" lang="th">
-                        <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบ Automation และ Mobile Application สำหรับการอนุมัติเอกสารและระบบแจ้งเตือนต่างๆ ทำให้ลดการใช้กระดาษภายในองค์กรได้มากกว่า 50%</li>
-                        <li><strong>ผลงานสำคัญ:</strong> ปรับปรุงระบบความปลอดภัยของข้อมูลองค์กรให้สอดคล้องกับมาตรฐาน ISO และข้อกำหนดทางกฎหมาย</li>
-                    </ul>
-                    
-                    <ul class="achievements-list" lang="en">
-                        <li><strong>Key Achievement:</strong> Developed Automation systems and Mobile Applications for document approval and notification systems, reducing paper usage within the organization by more than 50%</li>
-                        <li><strong>Key Achievement:</strong> Enhanced organizational data security systems to comply with ISO standards and legal requirements</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3 class="timeline-title" lang="th">IT Supervisor</h3>
-                <h3 class="timeline-title" lang="en">IT Supervisor</h3>
-                <div class="timeline-company" lang="th">บริษัท ซีแอลพี บิซิเนส แมเนจเมนท์ จำกัด | ปทุมธานี</div>
-                <div class="timeline-company" lang="en">CLP Business Management Co., Ltd. | Pathumthani</div>
-                <div class="timeline-date" lang="th">พฤษภาคม 2562 - มิถุนายน 2564</div>
-                <div class="timeline-date" lang="en">May 2019 - June 2021</div>
-                <div class="timeline-description">
-                    <ul lang="th">
-                        <li>บริหารโครงการ Implementation ระบบ ERP (Microsoft Dynamics AX D365) และดูแลการปรับปรุงระบบอย่างต่อเนื่อง</li>
-                        <li>ให้คำปรึกษาและแก้ไขปัญหาที่ซับซ้อนเกี่ยวกับระบบ ERP (Microsoft Dynamics AX D365 และ SAP Business One)</li>
-                        <li>จัดทำและบริหารแผนงานด้านไอทีให้สอดคล้องกับ KPI และมาตรฐาน ISO</li>
-                        <li>บริหารจัดการสต็อกอุปกรณ์ไอทีและวางแผนการจัดซื้อ</li>
-                    </ul>
-                    
-                    <ul lang="en">
-                        <li>Managed ERP implementation projects (Microsoft Dynamics AX D365) and handled continuous system improvements</li>
-                        <li>Provided consultation and solved complex problems related to ERP systems (Microsoft Dynamics AX D365 and SAP Business One)</li>
-                        <li>Created and managed IT plans in accordance with KPIs and ISO standards</li>
-                        <li>Managed IT equipment inventory and procurement planning</li>
-                    </ul>
-                    
-                    <ul class="achievements-list" lang="th">
-                        <li><strong>ผลงานสำคัญ:</strong> นำทีมดำเนินการติดตั้งและปรับแต่งระบบ ERP Microsoft Dynamics AX D365 จนสำเร็จตามกำหนดเวลาและงบประมาณ</li>
-                        <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบ Helpdesk เพื่อเพิ่มประสิทธิภาพในการแก้ไขปัญหาด้านไอทีและติดตามผลการดำเนินงาน</li>
-                    </ul>
-                    
-                    <ul class="achievements-list" lang="en">
-                        <li><strong>Key Achievement:</strong> Led the team in successfully implementing and customizing Microsoft Dynamics AX D365 ERP system on time and within budget</li>
-                        <li><strong>Key Achievement:</strong> Developed a Helpdesk system to increase efficiency in resolving IT issues and tracking performance</li>
-                    </ul>
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <h2 class="section-title">ประสบการณ์การทำงาน</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</h3>
+                        <div class="timeline-company">บริษัท ขายยา เพ็ญภาค จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date">กรกฎาคม 2564 - ปัจจุบัน</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>กำหนดกลยุทธ์และแผนงานด้านเทคโนโลยีสารสนเทศให้สอดคล้องกับวิสัยทัศน์และเป้าหมายทางธุรกิจขององค์กร</li>
+                                <li>บริหารจัดการงบประมาณด้าน IT และนำเสนอแผนการลงทุนโครงการต่างๆ ต่อผู้บริหารระดับสูง</li>
+                                <li>ควบคุมดูแลและประเมินผลการดำเนินงานด้านเทคโนโลยีสารสนเทศและระบบข้อมูลอิเล็กทรอนิกส์ทั้งหมดในองค์กร</li>
+                                <li>พัฒนาและปรับปรุงนโยบายด้านเทคโนโลยีสารสนเทศให้ทันสมัย สอดคล้องกับมาตรฐานสากลและข้อกำหนดทางกฎหมาย</li>
+                            </ul>
+                            
+                            <ul class="achievements-list">
+                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบ Automation และ Mobile Application สำหรับการอนุมัติเอกสารและระบบแจ้งเตือนต่างๆ ทำให้ลดการใช้กระดาษภายในองค์กรได้มากกว่า 50%</li>
+                                <li><strong>ผลงานสำคัญ:</strong> ปรับปรุงระบบความปลอดภัยของข้อมูลองค์กรให้สอดคล้องกับมาตรฐาน ISO และข้อกำหนดทางกฎหมาย</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">IT Supervisor</h3>
+                        <div class="timeline-company">บริษัท ซีแอลพี บิซิเนส แมเนจเมนท์ จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date">พฤษภาคม 2562 - มิถุนายน 2564</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>บริหารโครงการ Implementation ระบบ ERP (Microsoft Dynamics AX D365) และดูแลการปรับปรุงระบบอย่างต่อเนื่อง</li>
+                                <li>ให้คำปรึกษาและแก้ไขปัญหาที่ซับซ้อนเกี่ยวกับระบบ ERP (Microsoft Dynamics AX D365 และ SAP Business One)</li>
+                                <li>จัดทำและบริหารแผนงานด้านไอทีให้สอดคล้องกับ KPI และมาตรฐาน ISO</li>
+                                <li>บริหารจัดการสต็อกอุปกรณ์ไอทีและวางแผนการจัดซื้อ</li>
+                            </ul>
+                            
+                            <ul class="achievements-list">
+                                <li><strong>ผลงานสำคัญ:</strong> นำทีมดำเนินการติดตั้งและปรับแต่งระบบ ERP Microsoft Dynamics AX D365 จนสำเร็จตามกำหนดเวลาและงบประมาณ</li>
+                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบ Helpdesk เพื่อเพิ่มประสิทธิภาพในการแก้ไขปัญหาด้านไอทีและติดตามผลการดำเนินงาน</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">IT Support</h3>
+                        <div class="timeline-company">มาซูม่า (ประเทศไทย) จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date">กรกฎาคม 2558 - เมษายน 2562</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>บริหารจัดการและดูแลระบบเครือข่าย รวมถึง Network, Internet, Firewall, NAS Server, Print Server ฯลฯ</li>
+                                <li>แก้ไขปัญหาและให้คำปรึกษาแก่ผู้ใช้งานในองค์กรเกี่ยวกับระบบ ERP และปัญหาด้านฮาร์ดแวร์และซอฟต์แวร์</li>
+                                <li>จัดทำและดำเนินการตามแผนงานด้านไอทีให้สอดคล้องกับ KPI และข้อกำหนดของมาตรฐาน ISO</li>
+                                <li>ออกแบบและดำเนินการฝึกอบรมพนักงานเกี่ยวกับการใช้งานคอมพิวเตอร์และโปรแกรม Microsoft Excel</li>
+                                <li>ดูแลระบบกล้องวงจรปิด การสำรองข้อมูล และการตรวจสอบภาพย้อนหลัง</li>
+                            </ul>
+                            
+                            <ul class="achievements-list">
+                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบเครือข่ายให้มีเสถียรภาพและความปลอดภัยสูงขึ้น ทำให้ลดเวลาการหยุดชะงักของระบบลงได้ 75%</li>
+                                <li><strong>ผลงานสำคัญ:</strong> ปรับปรุงระบบสำรองข้อมูลให้มีประสิทธิภาพและเชื่อถือได้มากขึ้น</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">IT Support</h3>
+                        <div class="timeline-company">เภตรา กรุ๊ป จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date">ตุลาคม 2557 - มิถุนายน 2558</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>ดูแลและบำรุงรักษาระบบเครือข่ายและคอมพิวเตอร์ทั้งหมด 441 เครื่อง ใน 10 สาขาของกลุ่มบริษัท</li>
+                                <li>ให้บริการและแก้ไขปัญหาทางด้านเทคนิคแก่ผู้ใช้งานทั่วทั้งองค์กร</li>
+                                <li>วางแผนและดำเนินการบำรุงรักษาเชิงป้องกันเพื่อให้ระบบมีความเสถียรอยู่เสมอ</li>
+                                <li>ฝึกอบรมและพัฒนาความรู้ด้านคอมพิวเตอร์และระบบสารสนเทศให้กับพนักงาน</li>
+                            </ul>
+                            
+                            <ul class="achievements-list">
+                                <li><strong>ผลงานสำคัญ:</strong> บริหารจัดการระบบเครือข่ายและคอมพิวเตอร์ 10 สาขาอย่างมีประสิทธิภาพ แม้มีทรัพยากรบุคคลจำกัด</li>
+                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาชุดคู่มือการใช้งานระบบสารสนเทศเพื่อให้ผู้ใช้งานสามารถแก้ไขปัญหาเบื้องต้นได้ด้วยตนเอง</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3 class="timeline-title" lang="th">IT Support</h3>
-                <h3 class="timeline-title" lang="en">IT Support</h3>
-                <div class="timeline-company" lang="th">มาซูม่า (ประเทศไทย) จำกัด | ปทุมธานี</div>
-                <div class="timeline-company" lang="en">Mazuma (Thailand) Co., Ltd. | Pathumthani</div>
-                <div class="timeline-date" lang="th">กรกฎาคม 2558 - เมษายน 2562</div>
-                <div class="timeline-date" lang="en">July 2015 - April 2019</div>
-                <div class="timeline-description">
-                    <ul lang="th">
-                        <li>บริหารจัดการและดูแลระบบเครือข่าย รวมถึง Network, Internet, Firewall, NAS Server, Print Server ฯลฯ</li>
-                        <li>แก้ไขปัญหาและให้คำปรึกษาแก่ผู้ใช้งานในองค์กรเกี่ยวกับระบบ ERP และปัญหาด้านฮาร์ดแวร์และซอฟต์แวร์</li>
-                        <li>จัดทำและดำเนินการตามแผนงานด้านไอทีให้สอดคล้องกับ KPI และข้อกำหนดของมาตรฐาน ISO</li>
-                        <li>ออกแบบและดำเนินการฝึกอบรมพนักงานเกี่ยวกับการใช้งานคอมพิวเตอร์และโปรแกรม Microsoft Excel</li>
-                        <li>ดูแลระบบกล้องวงจรปิด การสำรองข้อมูล และการตรวจสอบภาพย้อนหลัง</li>
-                    </ul>
-                    
-                    <ul lang="en">
-                        <li>Managed and maintained network systems, including Network, Internet, Firewall, NAS Server, Print Server, etc.</li>
-                        <li>Troubleshooted and provided consultation to users regarding ERP systems and hardware/software issues</li>
-                        <li>Created and implemented IT plans in accordance with KPIs and ISO standard requirements</li>
-                        <li>Designed and conducted employee training on computer usage and Microsoft Excel</li>
-                        <li>Maintained CCTV systems, data backup, and video surveillance review</li>
-                    </ul>
-                    
-                    <ul class="achievements-list" lang="th">
-                        <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบเครือข่ายให้มีเสถียรภาพและความปลอดภัยสูงขึ้น ทำให้ลดเวลาการหยุดชะงักของระบบลงได้ 75%</li>
-                        <li><strong>ผลงานสำคัญ:</strong> ปรับปรุงระบบสำรองข้อมูลให้มีประสิทธิภาพและเชื่อถือได้มากขึ้น</li>
-                    </ul>
-                    
-                    <ul class="achievements-list" lang="en">
-                        <li><strong>Key Achievement:</strong> Enhanced network system stability and security, reducing system downtime by 75%</li>
-                        <li><strong>Key Achievement:</strong> Improved data backup systems for greater efficiency and reliability</li>
-                    </ul>
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <h2 class="section-title">การศึกษา</h2>
+            <div class="education-grid">
+                <div class="education-item">
+                    <h3 class="education-title">วิทยาศาสตรบัณฑิต (วท.บ.)</h3>
+                    <div class="education-school">มหาวิทยาลัยราชภัฏสวนดุสิต</div>
+                    <div class="education-program">คณะวิทยาศาสตร์ สาขาวิทยาการคอมพิวเตอร์</div>
+                    <div class="education-year">2550</div>
+                </div>
+                
+                <div class="education-item">
+                    <h3 class="education-title">มัธยมศึกษาตอนปลาย</h3>
+                    <div class="education-school">โรงเรียนปทุมวิไล</div>
+                    <div class="education-year">2547</div>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3 class="timeline-title" lang="th">IT Support</h3>
-                <h3 class="timeline-title" lang="en">IT Support</h3>
-                <div class="timeline-company" lang="th">เภตรา กรุ๊ป จำกัด | ปทุมธานี</div>
-                <div class="timeline-company" lang="en">Petra Group Co., Ltd. | Pathumthani</div>
-                <div class="timeline-date" lang="th">ตุลาคม 2557 - มิถุนายน 2558</div>
-                <div class="timeline-date" lang="en">October 2014 - June 2015</div>
-                <div class="timeline-description">
-                    <ul lang="th">
-                        <li>ดูแลและบำรุงรักษาระบบเครือข่ายและคอมพิวเตอร์ทั้งหมด 441 เครื่อง ใน 10 สาขาของกลุ่มบริษัท</li>
-                        <li>ให้บริการและแก้ไขปัญหาทางด้านเทคนิคแก่ผู้ใช้งานทั่วทั้งองค์กร</li>
-                        <li>วางแผนและดำเนินการบำรุงรักษาเชิงป้องกันเพื่อให้ระบบมีความเสถียรอยู่เสมอ</li>
-                        <li>ฝึกอบรมและพัฒนาความรู้ด้านคอมพิวเตอร์และระบบสารสนเทศให้กับพนักงาน</li>
-                    </ul>
-                    
-                    <ul lang="en">
-                        <li>Maintained network systems and 441 computers across 10 branches of the company group</li>
-                        <li>Provided technical support and troubleshooting to users throughout the organization</li>
-                        <li>Planned and implemented preventive maintenance to ensure system stability</li>
-                        <li>Trained and developed employees' knowledge of computer and information systems</li>
-                    </ul>
-                    
-                    <ul class="achievements-list" lang="th">
-                        <li><strong>ผลงานสำคัญ:</strong> บริหารจัดการระบบเครือข่ายและคอมพิวเตอร์ 10 สาขาอย่างมีประสิทธิภาพ แม้มีทรัพยากรบุคคลจำกัด</li>
-                        <li><strong>ผลงานสำคัญ:</strong> พัฒนาชุดคู่มือการใช้งานระบบสารสนเทศเพื่อให้ผู้ใช้งานสามารถแก้ไขปัญหาเบื้องต้นได้ด้วยตนเอง</li>
-                    </ul>
-                    
-                    <ul class="achievements-list" lang="en">
-                        <li><strong>Key Achievement:</strong> Efficiently managed network systems and computers across 10 branches despite limited human resources</li>
-                        <li><strong>Key Achievement:</strong> Developed information system user manuals to enable users to solve basic problems independently</li>
-                    </ul>
+        <!-- Certifications Section -->
+        <section id="certifications" class="section">
+            <h2 class="section-title">ประกาศนียบัตรและการอบรม</h2>
+            <ul class="certifications-list">
+                <li class="certification-item">
+                    <div class="certification-title">วิเคราะห์ข้อมูลองค์กรด้วย Power BI</div>
+                    <div class="certification-org">Future Skill</div>
+                    <div class="certification-year">2566</div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="certification-title">เจาะลึกการใช้ Excel เพื่อธุรกิจแบบมืออาชีพ</div>
+                    <div class="certification-org">Future Skill</div>
+                    <div class="certification-year">2566</div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="certification-title">Data Analytics for Business</div>
+                    <div class="certification-org">Future Skill</div>
+                    <div class="certification-year">2566</div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="certification-title">ISO 9001:2015 / GMP Asian / HALAL / GMP อ.ย.</div>
+                    <div class="certification-year">2565</div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="certification-title">DMS IT Module</div>
+                    <div class="certification-org">บริษัท เมอร์เซเดส-เบนซ์ (ประเทศไทย)</div>
+                    <div class="certification-year">2558</div>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2 class="section-title">ผลงานและโครงการสำคัญ</h2>
+            <div class="projects-list">
+                <div class="project-item">
+                    <!-- <img src="/api/profile.jpg" alt="ระบบ Mobile Approval" class="project-img"> -->
+                    <div class="project-content">
+                        <h3 class="project-title">ระบบอนุมัติเอกสารบนมือถือ</h3>
+                        <p>พัฒนาแอปพลิเคชันสำหรับการอนุมัติเอกสารต่างๆ ภายในองค์กร เช่น ใบลา ใบขอสั่งซื้อ เพื่อเพิ่มความสะดวกรวดเร็วและลดการใช้กระดาษ</p>
+                        <div class="tags">
+                            <span class="tag">Mobile App</span>
+                            <span class="tag">Paperless</span>
+                            <span class="tag">Workflow</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <!-- <img src="/api/placeholder/400/180" alt="ERP Implementation" class="project-img"> -->
+                    <div class="project-content">
+                        <h3 class="project-title">การติดตั้งระบบ ERP</h3>
+                        <p>บริหารโครงการติดตั้งและปรับแต่งระบบ ERP (Microsoft Dynamics 365) เพื่อเชื่อมโยงข้อมูลและกระบวนการทำงานทั้งหมดขององค์กร</p>
+                        <div class="tags">
+                            <span class="tag">ERP</span>
+                            <span class="tag">Microsoft Dynamics</span>
+                            <span class="tag">Business Process</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                 <!--   <img src="/api/placeholder/400/180" alt="Automated Notification System" class="project-img"> -->
+                    <div class="project-content">
+                        <h3 class="project-title">ระบบแจ้งเตือนอัตโนมัติ</h3>
+                        <p>พัฒนาระบบแจ้งเตือนอัตโนมัติสำหรับการติดตามวันหมดอายุของผลิตภัณฑ์ยา การต่ออายุใบอนุญาต และกำหนดการสำคัญต่างๆ</p>
+                        <div class="tags">
+                            <span class="tag">Automation</span>
+                            <span class="tag">Notification</span>
+                            <span class="tag">Compliance</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                <!--    <img src="/api/placeholder/400/180" alt="Network Infrastructure" class="project-img"> -->
+                    <div class="project-content">
+                        <h3 class="project-title">การปรับปรุงโครงสร้างพื้นฐานเครือข่าย</h3>
+                        <p>วางแผนและดำเนินการปรับปรุงโครงสร้างพื้นฐานด้านเครือข่ายขององค์กร เพื่อรองรับการเติบโตและเพิ่มความปลอดภัยของข้อมูล</p>
+                        <div class="tags">
+                            <span class="tag">Network</span>
+                            <span class="tag">Security</span>
+                            <span class="tag">Infrastructure</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-</section>
-
-<!-- Education Section -->
-<section id="education" class="section">
-    <h2 class="section-title" lang="th">การศึกษา</h2>
-    <h2 class="section-title" lang="en">Education</h2>
-    <div class="education-grid">
-        <div class="education-item">
-            <h3 class="education-title" lang="th">วิทยาศาสตรบัณฑิต (วท.บ.)</h3>
-            <h3 class="education-title" lang="en">Bachelor of Science (B.Sc.)</h3>
-            <div class="education-school" lang="th">มหาวิทยาลัยราชภัฏสวนดุสิต</div>
-            <div class="education-school" lang="en">Suan Dusit Rajabhat University</div>
-            <div class="education-program" lang="th">คณะวิทยาศาสตร์ สาขาวิทยาการคอมพิวเตอร์</div>
-            <div class="education-program" lang="en">Faculty of Science, Computer Science</div>
-            <div class="education-year" lang="th">2550</div>
-            <div class="education-year" lang="en">2007</div>
-        </div>
-        
-        <div class="education-item">
-            <h3 class="education-title" lang="th">มัธยมศึกษาตอนปลาย</h3>
-            <h3 class="education-title" lang="en">High School Diploma</h3>
-            <div class="education-school" lang="th">โรงเรียนปทุมวิไล</div>
-            <div class="education-school" lang="en">Patumwilai School</div>
-            <div class="education-year" lang="th">2547</div>
-            <div class="education-year" lang="en">2004</div>
-        </div>
-    </div>
-</section>
-
-<!-- Certifications Section -->
-<section id="certifications" class="section">
-    <h2 class="section-title" lang="th">ประกาศนียบัตรและการอบรม</h2>
-    <h2 class="section-title" lang="en">Certifications and Training</h2>
-    <ul class="certifications-list">
-        <li class="certification-item">
-            <div class="certification-title" lang="th">วิเคราะห์ข้อมูลองค์กรด้วย Power BI</div>
-            <div class="certification-title" lang="en">Organizational Data Analysis with Power BI</div>
-            <div class="certification-org" lang="th">Future Skill</div>
-            <div class="certification-org" lang="en">Future Skill</div>
-            <div class="certification-year" lang="th">2566</div>
-            <div class="certification-year" lang="en">2023</div>
-        </li>
-        
-        <li class="certification-item">
-            <div class="certification-title" lang="th">เจาะลึกการใช้ Excel เพื่อธุรกิจแบบมืออาชีพ</div>
-            <div class="certification-title" lang="en">Professional Excel for Business</div>
-            <div class="certification-org" lang="th">Future Skill</div>
-            <div class="certification-org" lang="en">Future Skill</div>
-            <div class="certification-year" lang="th">2566</div>
-            <div class="certification-year" lang="en">2023</div>
-        </li>
-        
-        <li class="certification-item">
-            <div class="certification-title" lang="th">Data Analytics for Business</div>
-            <div class="certification-title" lang="en">Data Analytics for Business</div>
-            <div class="certification-org" lang="th">Future Skill</div>
-            <div class="certification-org" lang="en">Future Skill</div>
-            <div class="certification-year" lang="th">2566</div>
-            <div class="certification-year" lang="en">2023</div>
-        </li>
-        
-        <li class="certification-item">
-            <div class="certification-title" lang="th">ISO 9001:2015 / GMP Asian / HALAL / GMP อ.ย.</div>
-            <div class="certification-title" lang="en">ISO 9001:2015 / GMP Asian / HALAL / GMP FDA</div>
-            <div class="certification-year" lang="th">2565</div>
-            <div class="certification-year" lang="en">2022</div>
-        </li>
-        
-        <li class="certification-item">
-            <div class="certification-title" lang="th">DMS IT Module</div>
-            <div class="certification-title" lang="en">DMS IT Module</div>
-            <div class="certification-org" lang="th">บริษัท เมอร์เซเดส-เบนซ์ (ประเทศไทย)</div>
-            <div class="certification-org" lang="en">Mercedes-Benz (Thailand)</div>
-            <div class="certification-year" lang="th">2558</div>
-            <div class="certification-year" lang="en">2015</div>
-        </li>
-    </ul>
-</section>
-
-<!-- Projects Section -->
-<section id="projects" class="section">
-    <h2 class="section-title" lang="th">ผลงานและโครงการสำคัญ</h2>
-    <h2 class="section-title" lang="en">Key Projects and Achievements</h2>
-    <div class="projects-list">
-        <div class="project-item">
-            <img src="/api/placeholder/400/180" alt="ระบบ Mobile Approval" class="project-img">
-            <div class="project-content">
-                <h3 class="project-title" lang="th">ระบบอนุมัติเอกสารบนมือถือ</h3>
-                <h3 class="project-title" lang="en">Mobile Document Approval System</h3>
-                <p lang="th">พัฒนาแอปพลิเคชันสำหรับการอนุมัติเอกสารต่างๆ ภายในองค์กร เช่น ใบลา ใบขอสั่งซื้อ เพื่อเพิ่มความสะดวกรวดเร็วและลดการใช้กระดาษ</p>
-                <p lang="en">Developed a mobile application for approving various documents within the organization, such as leave requests and purchase orders, to increase convenience and reduce paper usage</p>
-                <div class="tags">
-                    <span class="tag">Mobile App</span>
-                    <span class="tag">Paperless</span>
-                    <span class="tag">Workflow</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="project-item">
-            <img src="/api/placeholder/400/180" alt="ERP Implementation" class="project-img">
-            <div class="project-content">
-                <h3 class="project-title" lang="th">การติดตั้งระบบ ERP</h3>
-                <h3 class="project-title" lang="en">ERP System Implementation</h3>
-                <p lang="th">บริหารโครงการติดตั้งและปรับแต่งระบบ ERP (Microsoft Dynamics 365) เพื่อเชื่อมโยงข้อมูลและกระบวนการทำงานทั้งหมดขององค์กร</p>
-                <p lang="en">Managed the implementation and customization of ERP system (Microsoft Dynamics 365) to connect all data and business processes throughout the organization</p>
-                <div class="tags">
-                    <span class="tag">ERP</span>
-                    <span class="tag">Microsoft Dynamics</span>
-                    <span class="tag">Business Process</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="project-item">
-            <img src="/api/placeholder/400/180" alt="Automated Notification System" class="project-img">
-            <div class="project-content">
-                <h3 class="project-title" lang="th">ระบบแจ้งเตือนอัตโนมัติ</h3>
-                <h3 class="project-title" lang="en">Automated Notification System</h3>
-                <p lang="th">พัฒนาระบบแจ้งเตือนอัตโนมัติสำหรับการติดตามวันหมดอายุของผลิตภัณฑ์ยา การต่ออายุใบอนุญาต และกำหนดการสำคัญต่างๆ</p>
-                <p lang="en">Developed an automated notification system for tracking medicine expiration dates, license renewals, and other important schedules</p>
-                <div class="tags">
-                    <span class="tag">Automation</span>
-                    <span class="tag">Notification</span>
-                    <span class="tag">Compliance</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="project-item">
-            <img src="/api/placeholder/400/180" alt="Network Infrastructure" class="project-img">
-            <div class="project-content">
-                <h3 class="project-title" lang="th">การปรับปรุงโครงสร้างพื้นฐานเครือข่าย</h3>
-                <h3 class="project-title" lang="en">Network Infrastructure Improvement</h3>
-                <p lang="th">วางแผนและดำเนินการปรับปรุงโครงสร้างพื้นฐานด้านเครือข่ายขององค์กร เพื่อรองรับการเติบโตและเพิ่มความปลอดภัยของข้อมูล</p>
-                <p lang="en">Planned and implemented improvements to the organization's network infrastructure to support growth and enhance data security</p>
-                <div class="tags">
-                    <span class="tag">Network</span>
-                    <span class="tag">Security</span>
-                    <span class="tag">Infrastructure</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer>
-    <div class="footer-container">
-        <p lang="th">© 2025 สกลวรรธน์ สิริรัตนาธรสกุล - ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</p>
-        <p lang="en">© 2025 Sakolwat Sirirattanatarasakul - Information Technology Manager</p>
-        <p lang="th">พร้อมที่จะนำความรู้และประสบการณ์มาพัฒนาองค์กรของคุณ</p>
-        <p lang="en">Ready to bring knowledge and experience to develop your organization</p>
-    </div>
-</footer>
     
-<script>
-    // Simple navigation highlighting
-    document.addEventListener('DOMContentLoaded', function() {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-links a');
-        
-        window.addEventListener('scroll', function() {
-            let current = '';
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>© 2025 สกลวรรธน์ สิริรัตนาธรสกุล - ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</p>
+            <p>พร้อมที่จะนำความรู้และประสบการณ์มาพัฒนาองค์กรของคุณ</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple navigation highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
             
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if(pageYOffset >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if(link.getAttribute('href').substring(1) === current) {
-                    link.classList.add('active');
-                }
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if(pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
             });
         });
-        
-        // Language Switcher
-        const langButtons = document.querySelectorAll('.lang-btn');
-        
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                
-                // Remove active class from all buttons
-                langButtons.forEach(b => b.classList.remove('active'));
-                
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Show/hide content based on language
-                if (lang === 'th') {
-                    document.querySelectorAll('[lang="th"]').forEach(el => el.style.display = 'block');
-                    document.querySelectorAll('[lang="en"]').forEach(el => el.style.display = 'none');
-                } else {
-                    document.querySelectorAll('[lang="en"]').forEach(el => el.style.display = 'block');
-                    document.querySelectorAll('[lang="th"]').forEach(el => el.style.display = 'none');
-                }
-            });
-        });
-    });
-</script>
+    </script>
 </body>
 </html>
