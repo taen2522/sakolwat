@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>โปรแกรมคำนวณเงินกู้กองทุนสวัสดิการพนักงาน</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 700px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; }
+        button { background-color: #3498db; color: white; border: none; padding: 10px; 
+                cursor: pointer; font-size: 16px; width: 100%; }
+        #result-area { margin-top: 20px; padding: 15px; border: 1px solid #ddd; 
+                      background-color: #f9f9f9; display: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 8px; border-bottom: 1px solid #ddd; text-align: left; }
+        
+        /* เพิ่มสไตล์สำหรับเครื่องคิดเลข */
+        .calculator-container {
+            margin-top: 30px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .calc-display {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+        .calc-btn {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .calc-btn:hover {
+            opacity: 0.9;
+        }
+        .calc-btn-operator {
+            background-color: #e67e22;
+        }
+        .calc-btn-equals {
+            background-color: #2ecc71;
+        }
+        .calc-btn-clear {
+            background-color: #e74c3c;
+            grid-column: span 2;
+        }
+        .calc-btn-copy {
+            background-color: #3498db;
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>เครื่องคำนวณเงินกู้กองทุนสวัสดิการพนักงาน</h1>
+        
+        <div>
+            <p><strong>เงื่อนไขดอกเบี้ย:</strong></p>
+            <ul>
+                <li>กู้ 0.1ถึง 1 เท่าของรายได้:อัตราดอกเบี้ย 0.5% ต่อเดือน (6% ต่อปี)</li>
+                <li>กู้ 1.1ถึง 1.5 เท่าของรายได้:อัตราดอกเบี้ย 0.75% ต่อเดือน (9% ต่อปี)</li>
+                <li>กู้ 1.6 ถึง 2 เท่าของรายได้:อัตราดอกเบี้ย 1% ต่อเดือน (12% ต่อปี)</li>
+            </ul>
+        </div>
+        
+        <div class="form-group">
+            <label for="income">รายได้ต่อเดือน (บาท)</label>
+            <input type="number" id="income" placeholder="กรุณาระบุรายได้" min="1000">
+        </div>
+        
+        <div class="form-group">
+            <label for="loan-amount">จำนวนเงินที่ต้องการกู้ (บาท)</label>
+            <input type="number" id="loan-amount" placeholder="กรุณาระบุจำนวนเงินที่ต้องการกู้" min="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="start-date">วันเริ่มสัญญา</label>
+            <input type="date" id="start-date">
+        </div>
+        
+        <button id="calculate-btn">คำนวณ</button>
+        
+        <div id="result-area">
+            <h2>ผลการคำนวณ</h2>
+            <div id="loan-summary"></div>
+            
+            <h3>ตารางการหักเงินเดือนอัตโนมัติ</h3>
+            <div id="payment-table"></div>
+        </div>
+        
+        <!-- เพิ่มเครื่องคิดเลขด้านล่าง -->
+        <div class="calculator-container">
+            <h3>เครื่องคิดเลขพื้นฐาน</h3>
+            <input type="text" id="calc-display" class="calc-display" readonly>
+            <div class="calc-buttons">
+                <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
+                <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
+                <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
+                <button class="calc-btn calc-btn-operator" onclick="appendToDisplay('/')">/</button>
+                
+                <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
+                <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
+                <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
+                <button class="calc-btn calc-btn-operator" onclick="appendToDisplay('*')">×</button>
+                
+                <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
+                <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
+                <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
+                <button class="calc-btn calc-btn-operator" onclick="appendToDisplay('-')">−</button>
+                
+                <button class="calc-btn" onclick="appendToDisplay('0')">0</button>
+                <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
+                <button class="calc-btn calc-btn-equals" onclick="calculateResult()">=</button>
+                <button class="calc-btn calc-btn-operator" onclick="appendToDisplay('+')">+</button>
+                
+                <button class="calc-btn calc-btn-clear" onclick="clearDisplay()">C</button>
+                <button class="calc-btn calc-btn-copy" onclick="copyToLoanAmount()">ใช้ผลลัพธ์</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ตั้งค่าวันที่เริ่มต้น
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            document.getElementById('start-date').value = today.toISOString().split('T')[0];
+            document.getElementById('calculate-btn').addEventListener('click', calculateLoan);
+        });
+        
+        // ฟังก์ชันจัดรูปแบบตัวเลขเป็นสกุลเงิน
+        function formatMoney(number) {
+            return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+        
+        // ฟังก์ชันคำนวณเงินกู้
+        function calculateLoan() {
+            // รับค่าจาก Input
+            const income = parseFloat(document.getElementById('income').value);
+            const loanAmount = parseFloat(document.getElementById('loan-amount').value);
+            const startDate = document.getElementById('start-date').value;
+            
+            // ตรวจสอบข้อมูล
+            if (isNaN(income) || income <= 0) {
+                alert("กรุณาระบุรายได้ต่อเดือนที่ถูกต้อง");
+                return;
+            }
+            
+            if (isNaN(loanAmount) || loanAmount <= 0) {
+                alert("กรุณาระบุจำนวนเงินที่ต้องการกู้ที่ถูกต้อง");
+                return;
+            }
+            
+            // ตรวจสอบว่าจำนวนเงินกู้ไม่เกิน 2 เท่าของรายได้
+            const maxLoanAmount = income * 2;
+            if (loanAmount > maxLoanAmount) {
+                alert("จำนวนเงินที่ต้องการกู้เกิน 2 เท่าของรายได้ กรุณาระบุจำนวนใหม่");
+                document.getElementById('loan-amount').value = 0;
+                return;
+            }
+            
+            if (!startDate) {
+                alert("กรุณาระบุวันเริ่มสัญญา");
+                return;
+            }
+            
+            // คำนวณสัดส่วนการกู้
+            const ratio = loanAmount / income;
+            
+            // กำหนดอัตราดอกเบี้ย
+            let interestRate;
+            if (ratio <= 1) {
+                interestRate = 0.5;
+            } else if (ratio <= 1.5) {
+                interestRate = 0.75;
+            } else {
+                interestRate = 1;
+            }
+            
+            // คำนวณดอกเบี้ยและเงินต้นต่อเดือน
+            const monthlyInterest = loanAmount * (interestRate / 100);
+            const principalPerMonth = loanAmount / 12;
+            const totalMonthlyPayment = principalPerMonth + monthlyInterest;
+            
+            // สร้างสรุปข้อมูลเงินกู้
+            let summaryHTML = `
+                <p><strong>รายได้ต่อเดือน:</strong> ${formatMoney(income)} บาท</p>
+                <p><strong>จำนวนเงินที่กู้:</strong> ${formatMoney(loanAmount)} บาท</p>
+                <p><strong>สัดส่วนเงินกู้ต่อรายได้:</strong> ${(ratio).toFixed(2)} เท่า</p>
+                <p><strong>อัตราดอกเบี้ย:</strong> ${interestRate}% ต่อเดือน (${interestRate * 12}% ต่อปี)</p>
+                <p><strong>ดอกเบี้ยรวม:</strong> ${formatMoney(monthlyInterest * 12)} บาท</p>
+                <p><strong>ดอกเบี้ยต่อเดือน:</strong> ${formatMoney(monthlyInterest)} บาท</p>
+                <p><strong>ยอดที่ต้องชำระทั้งหมด:</strong> ${formatMoney(loanAmount + (monthlyInterest * 12))} บาท</p>
+            `;
+            
+            document.getElementById('loan-summary').innerHTML = summaryHTML;
+            
+            // สร้างตารางการชำระเงิน
+            createPaymentTable(startDate, principalPerMonth, monthlyInterest, totalMonthlyPayment);
+            
+            // แสดงผลลัพธ์
+            document.getElementById('result-area').style.display = 'block';
+        }
+        
+        // ฟังก์ชันสร้างตารางการชำระเงิน
+        function createPaymentTable(startDate, principal, interest, total) {
+            const startDateObj = new Date(startDate);
+            const thaiMonths = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 
+                               'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+            
+            let tableHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>งวดที่</th>
+                            <th>วันที่หักเงินเดือน</th>
+                            <th>เงินต้น</th>
+                            <th>ดอกเบี้ย</th>
+                            <th>ยอดรวม</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            // เริ่มจากเดือนถัดไปจากวันที่เริ่มสัญญา
+            const nextMonth = new Date(startDateObj);
+            nextMonth.setMonth(startDateObj.getMonth() + 1);
+            
+            for (let i = 0; i < 12; i++) {
+                const currentMonth = new Date(nextMonth);
+                currentMonth.setMonth(nextMonth.getMonth() + i);
+                
+                // หาวันสุดท้ายของเดือน
+                const lastDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+                
+                // แปลงปีเป็นพุทธศักราช
+                const buddhistYear = lastDay.getFullYear() + 543;
+                
+                // สร้างข้อความวันที่
+                const dateString = `${lastDay.getDate()} ${thaiMonths[lastDay.getMonth()]} ${buddhistYear}`;
+                
+                tableHTML += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${dateString}</td>
+                        <td>${formatMoney(principal)} บาท</td>
+                        <td>${formatMoney(interest)} บาท</td>
+                        <td>${formatMoney(total)} บาท</td>
+                    </tr>
+                `;
+            }
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+            
+            document.getElementById('payment-table').innerHTML = tableHTML;
+        }
+        
+        // ฟังก์ชันสำหรับเครื่องคิดเลข
+        function appendToDisplay(value) {
+            document.getElementById('calc-display').value += value;
+        }
+        
+        function clearDisplay() {
+            document.getElementById('calc-display').value = '';
+        }
+        
+        function calculateResult() {
+            try {
+                const result = eval(document.getElementById('calc-display').value);
+                document.getElementById('calc-display').value = result;
+            } catch (error) {
+                document.getElementById('calc-display').value = 'Error';
+            }
+        }
+        
+        function copyToLoanAmount() {
+            const calcValue = document.getElementById('calc-display').value;
+            if (calcValue && calcValue !== 'Error') {
+                document.getElementById('loan-amount').value = calcValue;
+            }
+        }
+    </script>
+</body>
+</html>
