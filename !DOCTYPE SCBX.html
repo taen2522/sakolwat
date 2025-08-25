@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCBX: การเปลี่ยนผ่านสู่กลุ่มบริษัทเทคโนโลยีทางการเงิน</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Warm neutrals like stone/amber, dark slate for text, and a muted corporate purple/blue accent) -->
+    <!-- Application Structure Plan: A thematic, single-page dashboard design with a top navigation bar for quick jumps and a logical scroll flow. The structure prioritizes the narrative of transformation: 1) Hero with a full-width image at the top, 2) Interactive 'Mothership' diagram to explain the new structure, 3) 'AI-First' section with interactive cards for the 5 muscles and 4 supplementary images, 4) Dynamic 'Performance Dashboard' with Chart.js for Net Profit and ROE, 5) NEW Dynamic 'Key Financials Dashboard' with tabbed interface and multiple Chart.js graphs for deeper financial analysis, 6) Tabbed 'Sustainability' section, 7) 'Leadership' timeline with executive images. This structure transforms the linear report into an exploratory experience, guiding the user through the core strategic strategic pillars for better comprehension and engagement. -->
+    <!-- Visualization & Content Choices:
+    - Hero Section: Updated with a full-width image at the top of the section.
+    - Mothership Structure: Report Table -> Goal: Organize -> Viz: Interactive HTML/CSS Diagram -> Interaction: Click to reveal info on subsidiaries, PLUS Gemini API for 'Business Opportunity' analysis -> Justification: More intuitive and engaging than a static table, enhanced by AI-generated insights.
+    - Financials (Net Profit/ROE): Report Text/Table -> Goal: Compare/Change -> Viz: Chart.js Line & Donut Charts -> Interaction: Toggle data series, hover for tooltips, PLUS Gemini API for 'Performance Analysis' summary, now with CORRECTED and VERIFIED 2562-2567 data -> Justification: Standard, effective way to show financial trends and health metrics, augmented with AI interpretation and verified data.
+    - NEW Key Financials (Comprehensive Data): Report Table -> Goal: Analyze various metrics -> Viz: Tabbed HTML/CSS Interface with multiple Chart.js graphs -> Interaction: Click tabs to switch categories, hover for tooltips -> Justification: Breaks down complex financial data into digestible, interactive visualizations across different aspects (position, performance, efficiency).
+    - AI Muscles Framework: Report Text -> Goal: Explain -> Viz: Interactive HTML/CSS Cards, now with 4 new images -> Interaction: Click/hover to expand for cards, static for images -> Justification: Breaks down a complex concept into digestible, interactive parts, enriched by AI-generated examples and improved visual appeal.
+    - Sustainability Pillars: Report Text -> Goal: Organize -> Viz: Tabbed HTML/CSS Interface -> Interaction: Click tabs to switch content, PLUS Gemini API for 'More Sustainability Ideas' -> Justification: Organizes related information cleanly, with AI-driven additional insights.
+    - CEO Succession: Report Text -> Goal: Inform -> Viz: HTML/CSS Timeline with actual executive images in rectangular frames -> Interaction: Static visual -> Justification: Clearly visualizes the transition plan with enhanced visual credibility, respecting user's desired layout.
+    - Library/Method: Chart.js for charts, Vanilla JS for all interactions, Gemini API (gemini-2.5-flash-preview-05-20) for LLM-powered text generation. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #fdfcf9;
+            color: #334155;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        .stat-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .mothership-center {
+            transition: all 0.3s ease-in-out;
+        }
+        .satellite {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .satellite:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px rgba(79, 70, 229, 0.5));
+        }
+        .ai-muscle-card {
+            perspective: 1000px;
+        }
+        .ai-muscle-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .ai-muscle-card.flipped .ai-muscle-card-inner {
+            transform: rotateY(180deg);
+        }
+        .ai-muscle-card-front, .ai-muscle-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 0.75rem;
+        }
+        .ai-muscle-card-back {
+            transform: rotateY(180deg);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #ccc;
+        }
+        .close-button:hover {
+            color: #999;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-slate-800">
+                SCB<span class="text-indigo-600">X</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#strategy" class="nav-link border-b-2 border-transparent pb-1">กลยุทธ์ยานแม่</a>
+                <a href="#ai-first" class="nav-link border-b-2 border-transparent pb-1">AI-First</a>
+                <a href="#performance" class="nav-link border-b-2 border-transparent pb-1">ผลประกอบการหลัก</a>
+                <a href="#key-financials" class="nav-link border-b-2 border-transparent pb-1">ข้อมูลการเงินสำคัญ</a>
+                <a href="#sustainability" class="nav-link border-b-2 border-transparent pb-1">ความยั่งยืน</a>
+                <a href="#leadership" class="nav-link border-b-2 border-transparent pb-1">ผู้นำองค์กร</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden">
+                <span class="text-3xl">☰</span>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pb-4">
+            <a href="#strategy" class="block py-2 text-center nav-link">กลยุทธ์ยานแม่</a>
+            <a href="#ai-first" class="block py-2 text-center nav-link">AI-First</a>
+            <a href="#performance" class="block py-2 text-center nav-link">ผลประกอบการหลัก</a>
+            <a href="#key-financials" class="block py-2 text-center nav-link">ข้อมูลการเงินสำคัญ</a>
+            <a href="#sustainability" class="block py-2 text-center nav-link">ความยั่งยืน</a>
+            <a href="#leadership" class="block py-2 text-center nav-link">ผู้นำองค์กร</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-32 bg-amber-50">
+            <div class="container mx-auto px-6 text-center">
+                <!-- รูปภาพที่ย้ายมาอยู่ด้านบนสุดและขยายเต็มพื้นที่ -->
+                <img src="https://img5.pic.in.th/file/secure-sv1/Screenshot-2025-08-25-114556.png" alt="SCBX Strategic Overview" class="w-full h-auto max-w-full block mx-auto mb-8 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/1200x450/7DD3FC/FFFFFF?text=SCBX+Overview'">
+                
+                <h1 class="text-4xl md:text-6xl font-bold text-slate-800 mb-4">จากธนาคารสู่กลุ่มเทคโนโลยี</h1>
+                <p class="text-xl md:text-2xl text-indigo-700 font-semibold mb-8">การเดินทางครั้งประวัติศาสตร์ของ SCBX</p>
+                <p class="max-w-3xl mx-auto text-slate-600 mb-12">
+                    SCBX ได้ปรับโครงสร้างองค์กรครั้งสำคัญ พลิกโฉมจากธนาคารพาณิชย์แบบดั้งเดิมสู่การเป็นกลุ่มบริษัทเทคโนโลยีทางการเงินระดับภูมิภาค เพื่อปลดล็อกศักยภาพการเติบโตและสร้างขีดความสามารถในการแข่งขันแห่งอนาคต (อ้างอิง: SCBX Annual Report)
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="stat-card bg-white p-6 rounded-xl shadow-md">
+                        <p class="text-indigo-600 text-4xl font-bold mb-2">43,943 ล้านบาท</p>
+                        <p class="text-slate-500">กำไรสุทธิปี 2567 (อ้างอิง: SCBX News Release Q4/2567)</p>
+                    </div>
+                    <div class="stat-card bg-white p-6 rounded-xl shadow-md">
+                        <p class="text-indigo-600 text-4xl font-bold mb-2">1.0%</p>
+                        <p class="text-slate-500">กำไรสุทธิเพิ่มขึ้นปี 2567 (อ้างอิง: SCBX News Release Q4/2567)</p>
+                    </div>
+                    <div class="stat-card bg-white p-6 rounded-xl shadow-md">
+                        <p class="text-indigo-600 text-4xl font-bold mb-2">42.3%</p>
+                        <p class="text-slate-500">Cost-to-Income Ratio ปี 2567 (อ้างอิง: SCBX News Release Q4/2567)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">กลยุทธ์ "ยานแม่" (Mothership)</h2>
+                    <p class="max-w-3xl mx-auto text-slate-600">
+                        โครงสร้างองค์กรที่ออกแบบมาเพื่อความคล่องตัวและปลดล็อกการเติบโต โดยมี SCBX เป็นยานแม่ที่กำหนดทิศทาง และมียานลูก (บริษัทในเครือ) ที่มีความเชี่ยวชาญเฉพาะด้าน ทำหน้าที่สร้างการเติบโตในธุรกิจใหม่ๆ คลิกที่ยานลูกเพื่อดูข้อมูลและ ✨ **โอกาสทางธุรกิจ** (อ้างอิง: SCBX Annual Report)
+                    </p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="w-full lg:w-1/2 h-[500px] relative flex items-center justify-center" id="mothership-container">
+                        <div class="mothership-center bg-indigo-600 text-white w-32 h-32 md:w-40 md:h-40 rounded-full flex items-center justify-center text-center font-bold text-xl shadow-2xl">SCBX</div>
+                    </div>
+                    <div id="satellite-info" class="w-full lg:w-1/2 bg-white p-8 rounded-xl shadow-lg min-h-[300px] flex flex-col justify-center transition-all duration-500">
+                        <h3 id="info-title" class="text-2xl font-bold text-indigo-700 mb-3">เลือกยานลูกเพื่อดูข้อมูล</h3>
+                        <p id="info-description" class="text-slate-600">คลิกที่วงกลมรอบๆ ยานแม่เพื่อเรียนรู้เกี่ยวกับบทบาทและกลยุทธ์ของแต่ละบริษัทในกลุ่ม SCBX</p>
+                        <button id="gemini-business-opportunity-btn" class="mt-4 px-6 py-2 bg-indigo-500 text-white rounded-lg shadow hover:bg-indigo-600 transition-colors hidden">✨ โอกาสทางธุรกิจ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-first" class="py-20 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">องค์กรที่ขับเคลื่อนด้วย AI (AI-First)</h2>
+                    <p class="max-w-3xl mx-auto text-slate-600">
+                        SCBX มุ่งสู่การเป็น AI-First Organization ผ่านยุทธศาสตร์ "Building Corporate AI Muscles" หรือการสร้างกล้ามเนื้อ AI ให้องค์กรแข็งแกร่งใน 5 มิติ เพื่อสร้างความได้เปรียบในการแข่งขันที่ยั่งยืน คลิกที่การ์ดเพื่อพลิกดูรายละเอียด และ ✨ **ตัวอย่างการประยุกต์ใช้** (อ้างอิง: SCBX Annual Report 2566, SCBX News Release Q1/2567)
+                    </p>
+                    <!-- New image grid for AI-First section -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 max-w-4xl mx-auto">
+                        <div>
+                            <img src="https://img5.pic.in.th/file/secure-sv1/messageImage_1756106265433.jpg" alt="AI Application 1" class="w-full h-auto rounded-lg shadow-md object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/7DD3FC/FFFFFF?text=AI+Image+1'">
+                        </div>
+                        <div>
+                            <img src="https://img5.pic.in.th/file/secure-sv1/messageImage_1756106283722.jpg" alt="AI Application 2" class="w-full h-auto rounded-lg shadow-md object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/7DD3FC/FFFFFF?text=AI+Image+2'">
+                        </div>
+                        <div>
+                            <img src="https://img2.pic.in.th/pic/messageImage_1756106255984.jpg" alt="AI Application 3" class="w-full h-auto rounded-lg shadow-md object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/7DD3FC/FFFFFF?text=AI+Image+3'">
+                        </div>
+                        <div>
+                            <img src="https://img5.pic.in.th/file/secure-sv1/messageImage_1756106269887.jpg" alt="AI Application 4" class="w-full h-auto rounded-lg shadow-md object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/7DD3FC/FFFFFF?text=AI+Image+4'">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mt-12">
+                </div>
+            </div>
+        </section>
+
+        <section id="performance" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">ผลประกอบการหลัก (กำไรสุทธิ และ ROE)</h2>
+                    <p class="max-w-3xl mx-auto text-slate-600">
+                        ผลประกอบการที่แข็งแกร่งสะท้อนประสิทธิภาพของกลยุทธ์การปรับโครงสร้างองค์กร ที่สร้างสมดุลระหว่างการเติบโตเชิงรุกและการบริหารความเสี่ยงอย่างรัดกุม คลิกปุ่มด้านล่างเพื่อ ✨ **วิเคราะห์ผลประกอบการ** (อ้างอิง: ตลาดหลักทรัพย์แห่งประเทศไทย, SCBX News Release)
+                    </p>
+                </div>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                    <div class="flex justify-center mb-6">
+                        <button id="btn-profit" class="px-4 py-2 bg-indigo-600 text-white rounded-l-md">กำไรสุทธิ</button>
+                        <button id="btn-roe" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-r-md">ROE</button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <div class="text-center mt-6">
+                        <button id="gemini-analyze-performance-btn" class="px-6 py-2 bg-indigo-500 text-white rounded-lg shadow hover:bg-indigo-600 transition-colors">✨ วิเคราะห์ผลประกอบการ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="key-financials" class="py-20 bg-blue-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">ข้อมูลทางการเงินที่สำคัญ 6 ปี (2562-2567)</h2>
+                    <p class="max-w-3xl mx-auto text-slate-600">
+                        วิเคราะห์แนวโน้มของฐานะการเงิน ผลประกอบการ และประสิทธิภาพในการดำเนินงานของ SCBX ย้อนหลัง 6 ปี (อ้างอิง: SCBX Financial Highlights)
+                    </p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                    <div class="mb-8 border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-6" id="key-financials-tabs">
+                            <button class="key-financial-tab whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors duration-300 border-indigo-500 text-indigo-600" data-chart="financialPosition">ฐานะการเงิน</button>
+                            <button class="key-financial-tab whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors duration-300 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" data-chart="performanceMetrics">ผลประกอบการ</button>
+                            <button class="key-financial-tab whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors duration-300 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" data-chart="operatingEfficiency">ประสิทธิภาพ</button>
+                        </nav>
+                    </div>
+                    <div id="key-financials-content">
+                        <div id="financialPositionChartContainer" class="chart-container">
+                            <canvas id="financialPositionChart"></canvas>
+                        </div>
+                        <div id="performanceMetricsChartContainer" class="chart-container hidden">
+                            <canvas id="performanceMetricsChart"></canvas>
+                        </div>
+                        <div id="operatingEfficiencyChartContainer" class="chart-container hidden">
+                            <canvas id="operatingEfficiencyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sustainability" class="py-20 bg-green-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">การพัฒนาสู่ความยั่งยืน</h2>
+                    <p class="max-w-3xl mx-auto text-slate-600">
+                        SCBX ผนวกเรื่องความยั่งยืน (ESG) เข้ากับกลยุทธ์ธุรกิจหลัก ผ่าน 4 เสาหลักและเป้าหมาย Net Zero เพื่อสร้างการเติบโตที่สมดุลและรับผิดชอบต่อสังคมและสิ่งแวดล้อม (อ้างอิง: SCBX Annual Report 2566, SCBX News Release Q4/2567)
+                    </p>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-8 border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-6" id="sustainability-tabs">
+                        </nav>
+                    </div>
+                    <div id="sustainability-content">
+                        <!-- Content will be injected here by JS -->
+                    </div>
+                    <div class="text-center mt-6">
+                         <button id="gemini-sustainability-ideas-btn" class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition-colors hidden">✨ แนวคิดเพิ่มเติม</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="leadership" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">การบริหารจัดการผู้นำสมัยใหม่</h2>
+                    <p class="max-w-3xl mx-auto text-slate-600">
+                        กรณีศึกษาการวางแผนสืบทอดตำแหน่ง CEO อย่างเป็นระบบ เพื่อสร้างความต่อเนื่องทางธุรกิจและความเชื่อมั่นของตลาดในระยะยาว (อ้างอิง: SCBX News Release, มกราคม 2566)
+                    </p>
+                </div>
+                <div class="max-w-5xl mx-auto relative">
+                    <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-200 hidden md:block"></div>
+                    <div class="md:grid grid-cols-2 gap-16">
+                        <!-- คุณอาทิตย์ นันทวิทยา -->
+                        <div class="mb-8 md:mb-0 text-center md:text-left">
+                            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500 h-full flex flex-col justify-center">
+                                <p class="text-slate-500 mb-2">ปัจจุบัน - 31 ธันวาคม 2569</p>
+                                <h3 class="text-xl font-bold text-slate-800">คุณอาทิตย์ นันทวิทยา</h3>
+                                <p class="text-indigo-600 font-semibold">ประธานเจ้าหน้าที่บริหาร</p>
+                                <p class="mt-2 text-sm text-slate-600">ผู้นำการเปลี่ยนผ่านครั้งประวัติศาสตร์ วางรากฐานกลยุทธ์ "ยานแม่" และขับเคลื่อนองค์กรสู่กลุ่มเทคโนโลยีทางการเงิน</p>
+                            </div>
+                        </div>
+                        <div class="mb-8 md:mb-0 flex items-center justify-center">
+                            <img src="https://img5.pic.in.th/file/secure-sv1/messageImage_1756093988151.jpg" alt="รูปภาพคุณอาทิตย์ นันทวิทยา" class="w-full h-auto max-w-xs md:max-w-md rounded-xl shadow-lg object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/4F46E5/FFFFFF?text=คุณอาทิตย์+นันทวิทยา'">
+                        </div>
+
+                        <!-- ดร. อารักษ์ สุธีวงศ์ -->
+                        <div class="mb-8 md:mb-0 flex items-center justify-center">
+                            <img src="https://img5.pic.in.th/file/secure-sv1/messageImage_1756094082507.jpg" alt="รูปภาพดร. อารักษ์ สุธีวงศ์" class="w-full h-auto max-w-xs md:max-w-md rounded-xl shadow-lg object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/22C55E/FFFFFF?text=ดร.+อารักษ์+สุธีวงศ์'">
+                        </div>
+                        <div class="mb-8 md:mb-0 text-center md:text-left">
+                             <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500 h-full flex flex-col justify-center">
+                                <p class="text-slate-500 mb-2">1 มกราคม 2570 เป็นต้นไป</p>
+                                <h3 class="text-xl font-bold text-slate-800">ดร. อารักษ์ สุธีวงศ์</h3>
+                                <p class="text-green-600 font-semibold">ประธานเจ้าหน้าที่บริหาร (ตามแผนสืบทอด)</p>
+                                <p class="mt-2 text-sm text-slate-600">ผู้นำรุ่นใหม่ที่จะสานต่อและเร่งการเติบโตในฐานะกลุ่มเทคโนโลยี โดยมีช่วงเวลาเปลี่ยนผ่าน 18 เดือนเพื่อรับมอบภารกิจ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="gemini-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" id="close-modal">&times;</span>
+            <h3 class="text-2xl font-bold text-slate-800 mb-4" id="modal-title"></h3>
+            <div id="modal-body" class="text-slate-700 whitespace-pre-wrap"></div>
+            <div id="modal-loading" class="text-center mt-4 hidden">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500 mx-auto"></div>
+                <p class="text-sm text-slate-500 mt-2">กำลังโหลดข้อมูลจาก Gemini...</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-slate-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>Presentation วิชา MBM304 การบริหารและการจัดการสมัยใหม่</p>
+            <p>นำเสนอโดย นางสาวจุติพร เรืองเดชผล รหัส 68233370007</p>
+	    <p>สาขาวิชาการจัดการธุรกิจสมัยใหม่</p>
+            <p class="text-sm text-slate-400 mt-2">ข้อมูลทั้งหมดอ้างอิงจากรายงานวิเคราะห์เชิงลึกของ SCBX</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const geminiModal = document.getElementById('gemini-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const modalLoading = document.getElementById('modal-loading');
+
+            closeModalBtn.addEventListener('click', () => {
+                geminiModal.classList.add('hidden');
+                modalBody.innerHTML = '';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === geminiModal) {
+                    geminiModal.classList.add('hidden');
+                    modalBody.innerHTML = '';
+                }
+            });
+
+            async function callGeminiAPI(prompt, title) {
+                geminiModal.classList.remove('hidden');
+                modalTitle.textContent = title;
+                modalBody.innerHTML = '';
+                modalLoading.classList.remove('hidden');
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                let retryCount = 0;
+                const maxRetries = 5;
+                const baseDelay = 1000;
+
+                while (retryCount < maxRetries) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            modalBody.innerHTML = text;
+                        } else {
+                            modalBody.innerHTML = 'ไม่สามารถสร้างข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง';
+                        }
+                        modalLoading.classList.add('hidden');
+                        return;
+
+                    } catch (error) {
+                        console.error('Error calling Gemini API:', error);
+                        retryCount++;
+                        if (retryCount < maxRetries) {
+                            const delay = baseDelay * Math.pow(2, retryCount - 1);
+                            await new Promise(res => setTimeout(res, delay));
+                        } else {
+                            modalBody.innerHTML = 'เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง';
+                            modalLoading.classList.add('hidden');
+                        }
+                    }
+                }
+            }
+
+            const satelliteData = [
+                { name: 'CardX', desc: 'ธุรกิจบัตรเครดิตและสินเชื่อส่วนบุคคลที่แยกออกมาเพื่อความคล่องตัว ตั้งเป้าเป็นผู้นำตลาดและเข้า IPO (อ้างอิง: SCBX Annual Report)', color: 'bg-red-500' },
+                { name: 'AutoX', desc: 'ให้บริการสินเชื่อจำนำทะเบียนรถภายใต้แบรนด์ "เงินไชโย" เข้าถึงลูกค้ารายย่อยทั่วประเทศ (อ้างอิง: SCBX Annual Report)', color: 'bg-orange-500' },
+                { name: 'SCB 10X', desc: 'บริษัทเรือธงด้านการลงทุนใน Fintech, Blockchain และสตาร์ทอัพทั่วโลก พร้อมวิจัยและพัฒนาเทคโนโลยีเชิงลึก (อ้างอิง: SCBX Annual Report)', color: 'bg-purple-500' },
+                { name: 'DataX', desc: 'ศูนย์กลางด้านข้อมูลและ AI ของกลุ่ม ทำหน้าที่รวบรวมและวิเคราะห์ข้อมูลเพื่อสร้างความได้เปรียบเชิงกลยุทธ (อ้างอิง: SCBX Annual Report)', color: 'bg-cyan-500' },
+                { name: 'InnovestX', desc: 'ซูเปอร์แอปด้านการลงทุนที่รวมสินทรัพย์ทุกประเภทไว้ในที่เดียว ทั้งหุ้นไทย, หุ้นต่างประเทศ, กองทุน และสินทรัพย์ดิจิทัล (อ้างอิง: SCBX Annual Report)', color: 'bg-blue-500' },
+                { name: 'Robinhood', desc: 'แพลตฟอร์มไลฟ์สไตล์ที่เคยเริ่มต้นจาก Food Delivery โดย SCBX ได้ขายกิจการให้กับกลุ่มผู้ลงทุนอื่นในช่วงปี 2567 (อ้างอิง: Forbes Thailand, ต.ค. 2567)', color: 'bg-green-500' }
+            ];
+
+            const mothershipContainer = document.getElementById('mothership-container');
+            const infoTitle = document.getElementById('info-title');
+            const infoDescription = document.getElementById('info-description');
+            const geminiBusinessOpportunityBtn = document.getElementById('gemini-business-opportunity-btn');
+            const radius = 180;
+            const angleStep = (2 * Math.PI) / satelliteData.length;
+
+            let currentSatellite = null; // To store selected satellite data
+
+            satelliteData.forEach((sat, index) => {
+                const angle = angleStep * index - (Math.PI / 2);
+                const x = radius * Math.cos(angle);
+                const y = radius * Math.sin(angle);
+
+                const satelliteEl = document.createElement('div');
+                satelliteEl.className = `satellite absolute w-24 h-24 rounded-full flex items-center justify-center text-center text-white font-semibold shadow-lg ${sat.color}`;
+                satelliteEl.style.transform = `translate(${x}px, ${y}px)`;
+                satelliteEl.textContent = sat.name;
+                satelliteEl.addEventListener('click', () => {
+                    infoTitle.textContent = sat.name;
+                    infoDescription.textContent = sat.desc;
+                    document.querySelectorAll('.satellite').forEach(el => el.style.transform = el.style.transform.replace(' scale(1.1)', ''));
+                    satelliteEl.style.transform += ' scale(1.1)';
+                    
+                    currentSatellite = sat; // Set current satellite
+                    geminiBusinessOpportunityBtn.classList.remove('hidden');
+                });
+                mothershipContainer.appendChild(satelliteEl);
+            });
+
+            geminiBusinessOpportunityBtn.addEventListener('click', () => {
+                if (currentSatellite) {
+                    const prompt = `ในฐานะผู้เชี่ยวชาญด้านกลยุทธ์ธุรกิจ ช่วยวิเคราะห์โอกาสทางธุรกิจที่สำคัญและน่าสนใจของบริษัท ${currentSatellite.name} ซึ่งมีบทบาทเป็น ${currentSatellite.desc} ในกลุ่ม SCBX โดยให้ข้อมูลเชิงลึก 2-3 ประเด็นสั้นๆ`;
+                    callGeminiAPI(prompt, `โอกาสทางธุรกิจของ ${currentSatellite.name}`);
+                }
+            });
+
+            const aiMusclesData = [
+                { name: 'People Muscle', icon: '👥', desc: 'พัฒนาบุคลากรให้มีความรู้ด้าน AI ผ่านโปรแกรม AI Literacy ทั่วทั้งองค์กร (อ้างอิง: SCBX Annual Report)', source_ref: 'SCBX Annual Report' },
+                { name: 'Data Muscle', icon: '📊', desc: 'จัดการข้อมูลอย่างเป็นระบบผ่าน SCB DataX เพื่อให้ข้อมูลเป็นสินทรัพย์เชิงกลยุทธ (อ้างอิง: SCBX Annual Report)', source_ref: 'SCBX Annual Report' },
+                { name: 'Capability Muscle', icon: '💡', desc: 'สร้างขีดความสามารถทางเทคโนโลยีของตนเอง เช่น การพัฒนา "Typhoon LLM" ภาษาไทย (อ้างอิง: SCBX News Release Q1/2567)', source_ref: 'SCBX News Release Q1/2567' },
+                { name: 'Empowerment Muscle', icon: '🚀', desc: 'สร้างวัฒนธรรมที่สนับสนุนการทดลอง กล้าเสี่ยง และยอมรับความผิดพลาดเพื่อการเรียนรู้ (อ้างอิง: SCBX Annual Report)', source_ref: 'SCBX Annual Report' },
+                { name: 'Enablement Muscle', icon: '⚙️', desc: 'จัดตั้งหน่วยงานกลางเพื่อสนับสนุนและขับเคลื่อนการนำ AI ไปใช้ทั่วทั้งองค์กร (อ้างอิง: SCBX Annual Report)', source_ref: 'SCBX Annual Report' }
+            ];
+
+            const aiMusclesContainer = document.querySelector('#ai-first .grid.md\\:grid-cols-2'); // Select the correct grid for cards
+            aiMusclesData.forEach(muscle => {
+                const card = document.createElement('div');
+                card.className = 'ai-muscle-card h-56 cursor-pointer';
+                card.innerHTML = `
+                    <div class="ai-muscle-card-inner">
+                        <div class="ai-muscle-card-front bg-white shadow-md">
+                            <span class="text-5xl mb-4">${muscle.icon}</span>
+                            <h3 class="text-xl font-bold text-slate-700">${muscle.name}</h3>
+                        </div>
+                        <div class="ai-muscle-card-back bg-indigo-600 text-white shadow-lg p-4">
+                            <p class="text-center text-sm">${muscle.desc}</p>
+                            <button class="gemini-ai-example-btn mt-4 px-4 py-1 bg-white text-indigo-600 rounded-lg shadow hover:bg-indigo-100 transition-colors text-sm">✨ ตัวอย่างการประยุกต์ใช้</button>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', (event) => {
+                    if (!event.target.classList.contains('gemini-ai-example-btn')) {
+                        card.classList.toggle('flipped');
+                    }
+                });
+                const exampleBtn = card.querySelector('.gemini-ai-example-btn');
+                exampleBtn.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent card from flipping when button is clicked
+                    const prompt = `ในฐานะผู้เชี่ยวชาญด้าน AI และธุรกิจ ช่วยยกตัวอย่างการประยุกต์ใช้ "AI Muscle" ในมิติ "${muscle.name}" (ซึ่งหมายถึง ${muscle.desc}) ภายในองค์กรขนาดใหญ่ เช่น SCBX โดยให้ตัวอย่างที่เฉพาะเจาะจงและเป็นไปได้ 1-2 ตัวอย่างสั้นๆ`;
+                    callGeminiAPI(prompt, `ตัวอย่างการประยุกต์ใช้: ${muscle.name}`);
+                });
+                aiMusclesContainer.appendChild(card);
+            });
+
+            // --- Performance Data (กำไรสุทธิ, ROE) ---
+            const performanceData = {
+                labels: ['2562', '2563', '2564', '2565', '2566', '2567'],
+                profit: [40400, 27200, 35600, 37500, 43500, 43943], // ล้านบาท
+                roe: [10.4, 6.7, 8.4, 8.3, 9.3, 9.1] // %
+            };
+
+            const ctxPerformance = document.getElementById('performanceChart').getContext('2d');
+            let performanceChart = new Chart(ctxPerformance, {
+                type: 'bar',
+                data: {
+                    labels: performanceData.labels,
+                    datasets: [{
+                        label: 'กำไรสุทธิ (ล้านบาท)',
+                        data: performanceData.profit,
+                        backgroundColor: 'rgba(79, 70, 229, 0.7)',
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        if (currentPerformanceType === 'profit') {
+                                            label += new Intl.NumberFormat('th-TH').format(context.parsed.y) + ' ล้านบาท';
+                                        } else {
+                                            label += `${context.parsed.y}%`;
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const btnProfit = document.getElementById('btn-profit');
+            const btnRoe = document.getElementById('btn-roe');
+            let currentPerformanceType = 'profit';
+
+            function updatePerformanceChart(dataType) {
+                performanceChart.data.datasets[0].data = performanceData[dataType];
+                if (dataType === 'profit') {
+                    performanceChart.data.datasets[0].label = 'กำไรสุทธิ (ล้านบาท)';
+                    btnProfit.classList.add('bg-indigo-600', 'text-white');
+                    btnProfit.classList.remove('bg-slate-200', 'text-slate-700');
+                    btnRoe.classList.add('bg-slate-200', 'text-slate-700');
+                    btnRoe.classList.remove('bg-indigo-600', 'text-white');
+                } else {
+                    performanceChart.data.datasets[0].label = 'Return on Equity (ROE)';
+                    btnRoe.classList.add('bg-indigo-600', 'text-white');
+                    btnRoe.classList.remove('bg-slate-200', 'text-slate-700');
+                    btnProfit.classList.add('bg-slate-200', 'text-slate-700');
+                    btnProfit.classList.remove('bg-indigo-600', 'text-white');
+                }
+                currentPerformanceType = dataType;
+                performanceChart.update();
+            }
+
+            btnProfit.addEventListener('click', () => updatePerformanceChart('profit'));
+            btnRoe.addEventListener('click', () => updatePerformanceChart('roe'));
+
+            document.getElementById('gemini-analyze-performance-btn').addEventListener('click', () => {
+                const currentDataLabels = performanceData.labels.join(', ');
+                const currentDataValues = performanceData[currentPerformanceType].map(val => currentPerformanceType === 'profit' ? `${new Intl.NumberFormat('th-TH').format(val)} ล้านบาท` : `${val}%`).join(', ');
+                const dataTypeLabel = currentPerformanceType === 'profit' ? 'กำไรสุทธิ' : 'ROE';
+
+                const prompt = `ในฐานะนักวิเคราะห์การเงิน ช่วยสรุปและวิเคราะห์ผลประกอบการของ SCBX จากข้อมูลต่อไปนี้: ปี (${currentDataLabels}) และค่า ${dataTypeLabel} (${currentDataValues}) โดยเน้นแนวโน้มและข้อสังเกตสำคัญสั้นๆ`;
+                callGeminiAPI(prompt, `บทวิเคราะห์ ${dataTypeLabel}`);
+            });
+
+            // --- Key Financials Data and Charts ---
+            const keyFinancialsData = {
+                labels: ['2562', '2563', '2564', '2565', '2566', '2567'],
+                financialPosition: {
+                    assets: [2964, 3278, 3315, 3454, 3439, 3487], // สินทรัพย์รวม (พันล้านบาท)
+                    liabilities: [2563, 2867, 2872, 2988, 2955, 2992], // หนี้สินรวม (พันล้านบาท)
+                    equity: [401, 412, 443, 467, 484, 495] // ส่วนของเจ้าของรวม (พันล้านบาท)
+                },
+                performanceMetrics: {
+                    operatingIncome: [166.1, 144.8, 150.3, 154.4, 171.1, 172.4], // รายได้จากการดำเนินงาน (พันล้านบาท)
+                    operatingProfitBeforeProvisions: [95.6, 80.4, 86.8, 84.5, 99.3, 99.4] // กำไรจากการดำเนินงานก่อนหักสำรอง (พันล้านบาท)
+                },
+                operatingEfficiency: {
+                    costToIncome: [42.5, 44.4, 42.3, 45.2, 42.0, 42.3], // ค่าใช้จ่ายต่อรายได้ (%)
+                    nim: [3.3, 3.2, 3.0, 3.3, 3.7, 3.9] // ส่วนต่างอัตราดอกเบี้ยสุทธิ (NIM) (%)
+                }
+            };
+
+            let financialPositionChart, performanceMetricsChart, operatingEfficiencyChart;
+
+            function createFinancialPositionChart() {
+                if (financialPositionChart) financialPositionChart.destroy();
+                const ctx = document.getElementById('financialPositionChart').getContext('2d');
+                financialPositionChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: keyFinancialsData.labels,
+                        datasets: [
+                            {
+                                label: 'สินทรัพย์รวม (พันล้านบาท)',
+                                data: keyFinancialsData.financialPosition.assets,
+                                borderColor: '#4F46E5', // Indigo
+                                backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                                fill: true,
+                                tension: 0.3
+                            },
+                            {
+                                label: 'หนี้สินรวม (พันล้านบาท)',
+                                data: keyFinancialsData.financialPosition.liabilities,
+                                borderColor: '#DC2626', // Red
+                                backgroundColor: 'rgba(220, 38, 38, 0.2)',
+                                fill: true,
+                                tension: 0.3
+                            },
+                             {
+                                label: 'ส่วนของเจ้าของรวม (พันล้านบาท)',
+                                data: keyFinancialsData.financialPosition.equity,
+                                borderColor: '#10B981', // Emerald
+                                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                                fill: true,
+                                tension: 0.3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: false, // Assets/Liabilities might not start at zero
+                                title: {
+                                    display: true,
+                                    text: 'พันล้านบาท'
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('th-TH').format(context.parsed.y) + ' พันล้านบาท';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function createPerformanceMetricsChart() {
+                if (performanceMetricsChart) performanceMetricsChart.destroy();
+                const ctx = document.getElementById('performanceMetricsChart').getContext('2d');
+                performanceMetricsChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: keyFinancialsData.labels,
+                        datasets: [
+                            {
+                                label: 'รายได้จากการดำเนินงาน (พันล้านบาท)',
+                                data: keyFinancialsData.performanceMetrics.operatingIncome,
+                                borderColor: '#F59E0B', // Amber
+                                backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                                fill: true,
+                                tension: 0.3
+                            },
+                            {
+                                label: 'กำไรจากการดำเนินงานก่อนหักสำรอง (พันล้านบาท)',
+                                data: keyFinancialsData.performanceMetrics.operatingProfitBeforeProvisions,
+                                borderColor: '#2563EB', // Blue
+                                backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                                fill: true,
+                                tension: 0.3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'พันล้านบาท'
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('th-TH').format(context.parsed.y) + ' พันล้านบาท';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function createOperatingEfficiencyChart() {
+                if (operatingEfficiencyChart) operatingEfficiencyChart.destroy();
+                const ctx = document.getElementById('operatingEfficiencyChart').getContext('2d');
+                operatingEfficiencyChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: keyFinancialsData.labels,
+                        datasets: [
+                            {
+                                label: 'ค่าใช้จ่ายต่อรายได้ (%)',
+                                data: keyFinancialsData.operatingEfficiency.costToIncome,
+                                borderColor: '#6D28D9', // Violet
+                                backgroundColor: 'rgba(109, 40, 217, 0.2)',
+                                fill: true,
+                                tension: 0.3
+                            },
+                            {
+                                label: 'ส่วนต่างอัตราดอกเบี้ยสุทธิ (NIM) (%)',
+                                data: keyFinancialsData.operatingEfficiency.nim,
+                                borderColor: '#059669', // Green
+                                backgroundColor: 'rgba(5, 150, 105, 0.2)',
+                                fill: true,
+                                tension: 0.3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '%'
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += `${context.parsed.y}%`;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Initial chart creation for key financials
+            createFinancialPositionChart();
+
+            // Handle tab switching for key financials
+            const keyFinancialsTabs = document.querySelectorAll('.key-financial-tab');
+            const keyFinancialsChartContainers = document.querySelectorAll('#key-financials-content .chart-container');
+
+            keyFinancialsTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Deactivate all tabs and hide all chart containers
+                    keyFinancialsTabs.forEach(t => {
+                        t.classList.remove('border-indigo-500', 'text-indigo-600');
+                        t.classList.add('border-transparent', 'text-gray-500', 'hover:border-gray-300', 'hover:text-gray-700');
+                    });
+                    keyFinancialsChartContainers.forEach(container => container.classList.add('hidden'));
+
+                    // Activate clicked tab
+                    tab.classList.add('border-indigo-500', 'text-indigo-600');
+                    tab.classList.remove('border-transparent', 'text-gray-500', 'hover:border-gray-300', 'hover:text-gray-700');
+
+                    // Show corresponding chart and create it if not already created
+                    const chartType = tab.dataset.chart;
+                    document.getElementById(`${chartType}ChartContainer`).classList.remove('hidden');
+                    
+                    // Create charts only if they don't exist
+                    if (chartType === 'financialPosition' && !financialPositionChart) {
+                        createFinancialPositionChart();
+                    } else if (chartType === 'performanceMetrics' && !performanceMetricsChart) {
+                        createPerformanceMetricsChart();
+                    } else if (chartType === 'operatingEfficiency' && !operatingEfficiencyChart) {
+                        createOperatingEfficiencyChart();
+                    }
+
+                    // Ensure all charts are properly redrawn after container visibility changes
+                    if (financialPositionChart) financialPositionChart.resize();
+                    if (performanceMetricsChart) performanceMetricsChart.resize();
+                    if (operatingEfficiencyChart) operatingEfficiencyChart.resize();
+                });
+            });
+
+
+            const sustainabilityData = [
+                {
+                    name: 'เมล็ดพันธุ์ดิจิทัล',
+                    content: `
+                        <h3 class="text-2xl font-bold text-green-700 mb-4">Planting Digital Seeds</h3>
+                        <p class="text-slate-600 mb-4">มุ่งสร้างนวัตกรรมดิจิทัลและพัฒนาบุคลากรให้พร้อมสำหรับอนาคต ด้วยงบลงทุน 14,000 ล้านบาท และเป้าหมายพัฒนาบุคลากร 200,000 คน เพื่อสร้างวัฒนธรรม AI-First ที่แข็งแกร่ง (อ้างอิง: SCBX Annual Report 2566)</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-green-600 h-2.5 rounded-full" style="width: 70%"></div></div>
+                        <p class="text-sm text-right mt-1">เป้าหมายการลงทุน</p>
+                    `
+                },
+                {
+                    name: 'สร้างคุณภาพชีวิต',
+                    content: `
+                        <h3 class="text-2xl font-bold text-green-700 mb-4">Enriching Lives</h3>
+                        <p class="text-slate-600 mb-4">สร้างงานและโอกาสในการเข้าถึงอาชีพที่ยั่งยืน ตัวอย่างที่โดดเด่นคือโครงการ <strong>Robinhood EV Bike</strong> ที่ให้บริการเช่ามอเตอร์ไซค์ไฟฟ้าแก่ไรเดอร์ในราคาประหยัด ช่วยลดภาระหนี้และลดการปล่อยคาร์บอน (อ้างอิง: SCBX Annual Report 2566)</p>
+                        <div class="text-center mt-4"><span class="text-5xl">🛵</span><p class="font-semibold mt-2">เป้าหมาย 5,000 คัน</p></div>
+                    `
+                },
+                {
+                    name: 'สร้างเศรษฐกิจเพื่ออนาคต',
+                    content: `
+                        <h3 class="text-2xl font-bold text-green-700 mb-4">Growing Economic Resilience</h3>
+                        <p class="text-slate-600 mb-4">สนับสนุนทางการเงิน 100,000 ล้านบาท ให้กับลูกค้าที่ต้องการเปลี่ยนผ่านสู่เศรษฐกิจคาร์บอนต่ำ ผ่านผลิตภัณฑ์สินเชื่อสีเขียว (Green Loans) และสินเชื่อที่เชื่อมโยงกับความยั่งยืน (Sustainability-Linked Loans) (อ้างอิง: SCBX Annual Report 2566)</p>
+                        <div class="text-center mt-4"><p class="text-3xl font-bold text-green-600">100,000 ล้านบาท</p><p class="text-slate-500">เงินทุนสนับสนุน</p></div>
+                    `
+                },
+                {
+                    name: 'มุ่งสู่ Net Zero',
+                    content: `
+                        <h3 class="text-2xl font-bold text-green-700 mb-4">Achieving Climate Neutrality</h3>
+                        <p class="text-slate-600 mb-4">ตั้งเป้าหมายการปล่อยก๊าซเรือนกระจกสุทธิเป็นศูนย์ (Net Zero) จากการดำเนินงานภายในปี 2030 และจากพอร์ตสินเชื่อและการลงทุนภายในปี 2050 ซึ่งครอบคลุม Scope 1, 2 และ 3 (อ้างอิง: SCBX News Release Q4/2567)</p>
+                        <div class="mt-4">
+                            <p class="font-semibold">2030 (การดำเนินงาน)</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2"><div class="bg-green-600 h-2.5 rounded-full" style="width: 25%"></div></div>
+                            <p class="font-semibold">2050 (สินเชื่อและการลงทุน)</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-green-600 h-2.5 rounded-full" style="width: 10%"></div></div>
+                        </div>
+                    `
+                }
+            ];
+
+            const tabsContainer = document.getElementById('sustainability-tabs');
+            const contentContainer = document.getElementById('sustainability-content');
+            const geminiSustainabilityIdeasBtn = document.getElementById('gemini-sustainability-ideas-btn');
+            let currentSustainabilityPillar = sustainabilityData[0]; // Default to the first pillar
+
+            sustainabilityData.forEach((tab, index) => {
+                const tabButton = document.createElement('button');
+                tabButton.textContent = tab.name;
+                tabButton.className = `whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors duration-300 ${index === 0 ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}`;
+                tabButton.addEventListener('click', () => {
+                    document.querySelectorAll('#sustainability-tabs button').forEach(btn => {
+                        btn.classList.remove('border-green-500', 'text-green-600');
+                        btn.classList.add('border-transparent', 'text-gray-500', 'hover:border-gray-300', 'hover:text-gray-700');
+                    });
+                    tabButton.classList.add('border-green-500', 'text-green-600');
+                    tabButton.classList.remove('border-transparent', 'text-gray-500', 'hover:border-gray-300', 'hover:text-gray-700');
+                    contentContainer.innerHTML = tab.content;
+                    currentSustainabilityPillar = tab; // Update current pillar
+                    geminiSustainabilityIdeasBtn.classList.remove('hidden');
+                });
+                tabsContainer.appendChild(tabButton);
+            });
+            contentContainer.innerHTML = sustainabilityData[0].content; // Load initial content
+            geminiSustainabilityIdeasBtn.classList.remove('hidden'); // Show button for initial content
+
+            geminiSustainabilityIdeasBtn.addEventListener('click', () => {
+                if (currentSustainabilityPillar) {
+                    const prompt = `ในฐานะผู้เชี่ยวชาญด้านความยั่งยืน (ESG) ช่วยเสนอแนวคิดเพิ่มเติม 2-3 ประการที่ SCBX สามารถทำได้เพื่อส่งเสริมเป้าหมายในด้าน "${currentSustainabilityPillar.name}" ซึ่งมีรายละเอียดดังนี้: ${currentSustainabilityPillar.content.replace(/<[^>]*>?/gm, '')} โดยเน้นแนวคิดที่เป็นรูปธรรมและสร้างสรรค์`;
+                    callGeminiAPI(prompt, `แนวคิดเพื่อความยั่งยืนเพิ่มเติม: ${currentSustainabilityPillar.name}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
