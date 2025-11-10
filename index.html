@@ -82,6 +82,35 @@
             gap: 0.5rem;
         }
         
+        /* Language Switcher */
+        .language-switcher {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .lang-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .lang-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+        
         .nav {
             background-color: var(--secondary-color);
             position: sticky;
@@ -424,9 +453,9 @@
     <header id="home">
         <div class="header-container">
             <img src="profile.png" alt="โปรไฟล์" class="profile-img">
-            <h1 class="name">สกลวรรธน์ สิริรัตนาธรสกุล</h1>
-            <h2 class="title">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ (IT Manager)</h2>
-            <p>ผู้เชี่ยวชาญด้านเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปี ในการพัฒนาระบบ ERP, Mobile Application และ Automation Solutions</p>
+            <h1 class="name" data-th="สกลวรรธน์ สิริรัตนาธรสกุล" data-en="Sakonwan Siriratanathornsakul">สกลวรรธน์ สิริรัตนาธรสกุล</h1>
+            <h2 class="title" data-th="ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ (IT Manager)" data-en="IT Manager">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ (IT Manager)</h2>
+            <p class="header-desc" data-th="ผู้เชี่ยวชาญด้านเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปี ในการพัฒนาระบบ ERP, Mobile Application และ Automation Solutions" data-en="IT professional with over 11 years of experience in ERP systems, Mobile Application development, and Automation Solutions">ผู้เชี่ยวชาญด้านเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปี ในการพัฒนาระบบ ERP, Mobile Application และ Automation Solutions</p>
             
             <div class="contact-info">
                 <div class="contact-item">
@@ -445,8 +474,14 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                     </svg>
-                    <span>ปทุมธานี, ประเทศไทย</span>
+                    <span data-th="ปทุมธานี, ประเทศไทย" data-en="Pathum Thani, Thailand">ปทุมธานี, ประเทศไทย</span>
                 </div>
+            </div>
+            
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="th">ไทย</button>
+                <button class="lang-btn" data-lang="en">English</button>
             </div>
         </div>
     </header>
@@ -455,13 +490,13 @@
     <nav class="nav">
         <div class="nav-container">
             <ul class="nav-links">
-                <li><a href="#home" class="active">หน้าหลัก</a></li>
-                <li><a href="#about">เกี่ยวกับฉัน</a></li>
-                <li><a href="#skills">ทักษะ</a></li>
-                <li><a href="#experience">ประสบการณ์</a></li>
-                <li><a href="#education">การศึกษา</a></li>
-                <li><a href="#certifications">ประกาศนียบัตร</a></li>
-                <li><a href="#projects">ผลงาน</a></li>
+                <li><a href="#home" class="active" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a></li>
+                <li><a href="#about" data-th="เกี่ยวกับฉัน" data-en="About">เกี่ยวกับฉัน</a></li>
+                <li><a href="#skills" data-th="ทักษะ" data-en="Skills">ทักษะ</a></li>
+                <li><a href="#experience" data-th="ประสบการณ์" data-en="Experience">ประสบการณ์</a></li>
+                <li><a href="#education" data-th="การศึกษา" data-en="Education">การศึกษา</a></li>
+                <li><a href="#certifications" data-th="ประกาศนียบัตร" data-en="Certifications">ประกาศนียบัตร</a></li>
+                <li><a href="#projects" data-th="ผลงาน" data-en="Projects">ผลงาน</a></li>
             </ul>
         </div>
     </nav>
@@ -470,80 +505,80 @@
     <div class="main-content">
         <!-- About Section -->
         <section id="about" class="section">
-            <h2 class="section-title">เกี่ยวกับฉัน</h2>
+            <h2 class="section-title" data-th="เกี่ยวกับฉัน" data-en="About Me">เกี่ยวกับฉัน</h2>
             <div class="about-content">
-                <p>ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปีในวงการไอที เชี่ยวชาญในการวางแผนกลยุทธ์ด้านเทคโนโลยีสารสนเทศ การบริหารโครงการ และการพัฒนาแอปพลิเคชันเพื่อตอบสนองความต้องการทางธุรกิจ</p>
-                <p>มีความเชี่ยวชาญในการติดตั้งและบริหารจัดการระบบ ERP ชั้นนำอย่าง SAP Business One และ Microsoft Dynamics 365 รวมถึงการพัฒนาแอปพลิเคชันสำหรับระบบอนุมัติเอกสารและระบบอัตโนมัติเพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร</p>
-                <p>มีความสามารถในการสื่อสารและถ่ายทอดความรู้ด้านเทคโนโลยีให้กับผู้ใช้งานทุกระดับ รวมถึงความคิดสร้างสรรค์ในการนำเสนอข้อมูลและการแก้ไขปัญหาที่ซับซ้อน</p>
+                <p data-th="ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปีในวงการไอที เชี่ยวชาญในการวางแผนกลยุทธ์ด้านเทคโนโลยีสารสนเทศ การบริหารโครงการ และการพัฒนาแอปพลิเคชันเพื่อตอบสนองความต้องการทางธุรกิจ" data-en="IT Manager with over 11 years of experience in the IT industry. Specialized in IT strategic planning, project management, and application development to meet business requirements.">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศที่มีประสบการณ์กว่า 11 ปีในวงการไอที เชี่ยวชาญในการวางแผนกลยุทธ์ด้านเทคโนโลยีสารสนเทศ การบริหารโครงการ และการพัฒนาแอปพลิเคชันเพื่อตอบสนองความต้องการทางธุรกิจ</p>
+                <p data-th="มีความเชี่ยวชาญในการติดตั้งและบริหารจัดการระบบ ERP ชั้นนำอย่าง SAP Business One และ Microsoft Dynamics 365 รวมถึงการพัฒนาแอปพลิเคชันสำหรับระบบอนุมัติเอกสารและระบบอัตโนมัติเพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร" data-en="Expertise in implementing and managing leading ERP systems such as SAP Business One and Microsoft Dynamics 365, including developing applications for document approval systems and automation systems to enhance organizational efficiency.">มีความเชี่ยวชาญในการติดตั้งและบริหารจัดการระบบ ERP ชั้นนำอย่าง SAP Business One และ Microsoft Dynamics 365 รวมถึงการพัฒนาแอปพลิเคชันสำหรับระบบอนุมัติเอกสารและระบบอัตโนมัติเพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร</p>
+                <p data-th="มีความสามารถในการสื่อสารและถ่ายทอดความรู้ด้านเทคโนโลยีให้กับผู้ใช้งานทุกระดับ รวมถึงความคิดสร้างสรรค์ในการนำเสนอข้อมูลและการแก้ไขปัญหาที่ซับซ้อน" data-en="Strong communication skills and ability to transfer technology knowledge to users at all levels, including creativity in data presentation and complex problem-solving.">มีความสามารถในการสื่อสารและถ่ายทอดความรู้ด้านเทคโนโลยีให้กับผู้ใช้งานทุกระดับ รวมถึงความคิดสร้างสรรค์ในการนำเสนอข้อมูลและการแก้ไขปัญหาที่ซับซ้อน</p>
             </div>
         </section>
         
         <!-- Skills Section -->
         <section id="skills" class="section">
-            <h2 class="section-title">ทักษะความสามารถ</h2>
+            <h2 class="section-title" data-th="ทักษะความสามารถ" data-en="Skills & Competencies">ทักษะความสามารถ</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>การพัฒนาระบบ</h3>
+                    <h3 data-th="การพัฒนาระบบ" data-en="System Development">การพัฒนาระบบ</h3>
                     <ul class="skills-list">
-                        <li>พัฒนา Mobile Application และระบบ Automation</li>
-                        <li>ระบบอนุมัติเอกสาร (Approval Workflow)</li>
-                        <li>ระบบงาน Paperless</li>
-                        <li>ระบบแจ้งเตือนอัตโนมัติ</li>
-                        <li>Google Script Development</li>
-                        <li>Crystal Report Development</li>
+                        <li data-th="พัฒนา Mobile Application และระบบ Automation" data-en="Mobile Application & Automation Development">พัฒนา Mobile Application และระบบ Automation</li>
+                        <li data-th="ระบบอนุมัติเอกสาร (Approval Workflow)" data-en="Document Approval System (Workflow)">ระบบอนุมัติเอกสาร (Approval Workflow)</li>
+                        <li data-th="ระบบงาน Paperless" data-en="Paperless System">ระบบงาน Paperless</li>
+                        <li data-th="ระบบแจ้งเตือนอัตโนมัติ" data-en="Automated Notification System">ระบบแจ้งเตือนอัตโนมัติ</li>
+                        <li data-th="Google Script Development" data-en="Google Script Development">Google Script Development</li>
+                        <li data-th="Crystal Report Development" data-en="Crystal Report Development">Crystal Report Development</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3>ระบบ ERP</h3>
+                    <h3 data-th="ระบบ ERP" data-en="ERP Systems">ระบบ ERP</h3>
                     <ul class="skills-list">
-                        <li>SAP Business One - Implementation & Support</li>
-                        <li>Microsoft Dynamics 365 - Implementation & Support</li>
-                        <li>SQL Query & Reporting</li>
-                        <li>Business Process Analysis</li>
-                        <li>System Integration</li>
+                        <li data-th="SAP Business One - Implementation & Support" data-en="SAP Business One - Implementation & Support">SAP Business One - Implementation & Support</li>
+                        <li data-th="Microsoft Dynamics 365 - Implementation & Support" data-en="Microsoft Dynamics 365 - Implementation & Support">Microsoft Dynamics 365 - Implementation & Support</li>
+                        <li data-th="SQL Query & Reporting" data-en="SQL Query & Reporting">SQL Query & Reporting</li>
+                        <li data-th="Business Process Analysis" data-en="Business Process Analysis">Business Process Analysis</li>
+                        <li data-th="System Integration" data-en="System Integration">System Integration</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3>การวิเคราะห์ข้อมูล</h3>
+                    <h3 data-th="การวิเคราะห์ข้อมูล" data-en="Data Analytics">การวิเคราะห์ข้อมูล</h3>
                     <ul class="skills-list">
-                        <li>Microsoft Power BI</li>
-                        <li>Advanced Excel (Pivot, Power Query)</li>
-                        <li>Data Analytics for Business</li>
-                        <li>Reporting & Dashboard Creation</li>
+                        <li data-th="Microsoft Power BI" data-en="Microsoft Power BI">Microsoft Power BI</li>
+                        <li data-th="Advanced Excel (Pivot, Power Query)" data-en="Advanced Excel (Pivot, Power Query)">Advanced Excel (Pivot, Power Query)</li>
+                        <li data-th="Data Analytics for Business" data-en="Data Analytics for Business">Data Analytics for Business</li>
+                        <li data-th="Reporting & Dashboard Creation" data-en="Reporting & Dashboard Creation">Reporting & Dashboard Creation</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3>การบริหารจัดการ</h3>
+                    <h3 data-th="การบริหารจัดการ" data-en="Management">การบริหารจัดการ</h3>
                     <ul class="skills-list">
-                        <li>IT Strategy Planning</li>
-                        <li>Team Management</li>
-                        <li>Project Management</li>
-                        <li>Budget Planning</li>
-                        <li>Resource Allocation</li>
-                        <li>IT Training & Development</li>
+                        <li data-th="IT Strategy Planning" data-en="IT Strategy Planning">IT Strategy Planning</li>
+                        <li data-th="Team Management" data-en="Team Management">Team Management</li>
+                        <li data-th="Project Management" data-en="Project Management">Project Management</li>
+                        <li data-th="Budget Planning" data-en="Budget Planning">Budget Planning</li>
+                        <li data-th="Resource Allocation" data-en="Resource Allocation">Resource Allocation</li>
+                        <li data-th="IT Training & Development" data-en="IT Training & Development">IT Training & Development</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3>ทักษะพิเศษ</h3>
+                    <h3 data-th="ทักษะพิเศษ" data-en="Special Skills">ทักษะพิเศษ</h3>
                     <ul class="skills-list">
-                        <li>Video Editing & Production</li>
-                        <li>Presentation & Public Speaking</li>
-                        <li>Training & Workshop Facilitation</li>
-                        <li>Event MC</li>
+                        <li data-th="Video Editing & Production" data-en="Video Editing & Production">Video Editing & Production</li>
+                        <li data-th="Presentation & Public Speaking" data-en="Presentation & Public Speaking">Presentation & Public Speaking</li>
+                        <li data-th="Training & Workshop Facilitation" data-en="Training & Workshop Facilitation">Training & Workshop Facilitation</li>
+                        <li data-th="Event MC" data-en="Event MC">Event MC</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h3>ทักษะเพิ่มเติม</h3>
+                    <h3 data-th="ทักษะเพิ่มเติม" data-en="Additional Skills">ทักษะเพิ่มเติม</h3>
                     <ul class="skills-list">
-                        <li>ISO 9001:2015 Standards</li>
-                        <li>GMP Standards</li>
-                        <li>IT Security Policy Development</li>
-                        <li>First Aid & Emergency Response</li>
+                        <li data-th="ISO 9001:2015 Standards" data-en="ISO 9001:2015 Standards">ISO 9001:2015 Standards</li>
+                        <li data-th="GMP Standards" data-en="GMP Standards">GMP Standards</li>
+                        <li data-th="IT Security Policy Development" data-en="IT Security Policy Development">IT Security Policy Development</li>
+                        <li data-th="First Aid & Emergency Response" data-en="First Aid & Emergency Response">First Aid & Emergency Response</li>
                     </ul>
                 </div>
             </div>
@@ -551,24 +586,24 @@
         
         <!-- Experience Section -->
         <section id="experience" class="section">
-            <h2 class="section-title">ประสบการณ์การทำงาน</h2>
+            <h2 class="section-title" data-th="ประสบการณ์การทำงาน" data-en="Work Experience">ประสบการณ์การทำงาน</h2>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 class="timeline-title">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</h3>
-                        <div class="timeline-company">บริษัท ขายยา เพ็ญภาค จำกัด | ปทุมธานี</div>
-                        <div class="timeline-date">กรกฎาคม 2564 - ปัจจุบัน</div>
+                        <h3 class="timeline-title" data-th="ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ" data-en="IT Manager">ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</h3>
+                        <div class="timeline-company" data-th="บริษัท ขายยา เพ็ญภาค จำกัด | ปทุมธานี" data-en="Pennpak Pharmaceutical Company Limited | Pathum Thani">บริษัท ขายยา เพ็ญภาค จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date" data-th="กรกฎาคม 2564 - ปัจจุบัน" data-en="July 2021 - Present">กรกฎาคม 2564 - ปัจจุบัน</div>
                         <div class="timeline-description">
                             <ul>
-                                <li>กำหนดกลยุทธ์และแผนงานด้านเทคโนโลยีสารสนเทศให้สอดคล้องกับวิสัยทัศน์และเป้าหมายทางธุรกิจขององค์กร</li>
-                                <li>บริหารจัดการงบประมาณด้าน IT และนำเสนอแผนการลงทุนโครงการต่างๆ ต่อผู้บริหารระดับสูง</li>
-                                <li>ควบคุมดูแลและประเมินผลการดำเนินงานด้านเทคโนโลยีสารสนเทศและระบบข้อมูลอิเล็กทรอนิกส์ทั้งหมดในองค์กร</li>
-                                <li>พัฒนาและปรับปรุงนโยบายด้านเทคโนโลยีสารสนเทศให้ทันสมัย สอดคล้องกับมาตรฐานสากลและข้อกำหนดทางกฎหมาย</li>
+                                <li data-th="กำหนดกลยุทธ์และแผนงานด้านเทคโนโลยีสารสนเทศให้สอดคล้องกับวิสัยทัศน์และเป้าหมายทางธุรกิจขององค์กร" data-en="Define IT strategies and plans aligned with the organization's vision and business objectives">กำหนดกลยุทธ์และแผนงานด้านเทคโนโลยีสารสนเทศให้สอดคล้องกับวิสัยทัศน์และเป้าหมายทางธุรกิจขององค์กร</li>
+                                <li data-th="บริหารจัดการงบประมาณด้าน IT และนำเสนอแผนการลงทุนโครงการต่างๆ ต่อผู้บริหารระดับสูง" data-en="Manage IT budgets and present project investment plans to senior management">บริหารจัดการงบประมาณด้าน IT และนำเสนอแผนการลงทุนโครงการต่างๆ ต่อผู้บริหารระดับสูง</li>
+                                <li data-th="ควบคุมดูแลและประเมินผลการดำเนินงานด้านเทคโนโลยีสารสนเทศและระบบข้อมูลอิเล็กทรอนิกส์ทั้งหมดในองค์กร" data-en="Oversee and evaluate IT operations and all electronic data systems within the organization">ควบคุมดูแลและประเมินผลการดำเนินงานด้านเทคโนโลยีสารสนเทศและระบบข้อมูลอิเล็กทรอนิกส์ทั้งหมดในองค์กร</li>
+                                <li data-th="พัฒนาและปรับปรุงนโยบายด้านเทคโนโลยีสารสนเทศให้ทันสมัย สอดคล้องกับมาตรฐานสากลและข้อกำหนดทางกฎหมาย" data-en="Develop and improve IT policies to be modern, comply with international standards and legal requirements">พัฒนาและปรับปรุงนโยบายด้านเทคโนโลยีสารสนเทศให้ทันสมัย สอดคล้องกับมาตรฐานสากลและข้อกำหนดทางกฎหมาย</li>
                             </ul>
                             
                             <ul class="achievements-list">
-                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบ Automation และ Mobile Application สำหรับการอนุมัติเอกสารและระบบแจ้งเตือนต่างๆ ทำให้ลดการใช้กระดาษภายในองค์กรได้มากกว่า 50%</li>
-                                <li><strong>ผลงานสำคัญ:</strong> ปรับปรุงระบบความปลอดภัยของข้อมูลองค์กรให้สอดคล้องกับมาตรฐาน ISO และข้อกำหนดทางกฎหมาย</li>
+                                <li><strong data-th="ผลงานสำคัญ:" data-en="Key Achievement:">ผลงานสำคัญ:</strong> <span data-th="พัฒนาระบบ Automation และ Mobile Application สำหรับการอนุมัติเอกสารและระบบแจ้งเตือนต่างๆ ทำให้ลดการใช้กระดาษภายในองค์กรได้มากกว่า 50%" data-en="Developed Automation systems and Mobile Applications for document approval and notification systems, reducing paper usage by over 50%">พัฒนาระบบ Automation และ Mobile Application สำหรับการอนุมัติเอกสารและระบบแจ้งเตือนต่างๆ ทำให้ลดการใช้กระดาษภายในองค์กรได้มากกว่า 50%</span></li>
+                                <li><strong data-th="ผลงานสำคัญ:" data-en="Key Achievement:">ผลงานสำคัญ:</strong> <span data-th="ปรับปรุงระบบความปลอดภัยของข้อมูลองค์กรให้สอดคล้องกับมาตรฐาน ISO และข้อกำหนดทางกฎหมาย" data-en="Improved organizational data security systems to comply with ISO standards and legal requirements">ปรับปรุงระบบความปลอดภัยของข้อมูลองค์กรให้สอดคล้องกับมาตรฐาน ISO และข้อกำหนดทางกฎหมาย</span></li>
                             </ul>
                         </div>
                     </div>
@@ -576,20 +611,20 @@
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 class="timeline-title">IT Supervisor</h3>
-                        <div class="timeline-company">บริษัท ซีแอลพี บิซิเนส แมเนจเมนท์ จำกัด | ปทุมธานี</div>
-                        <div class="timeline-date">พฤษภาคม 2562 - มิถุนายน 2564</div>
+                        <h3 class="timeline-title" data-th="IT Supervisor" data-en="IT Supervisor">IT Supervisor</h3>
+                        <div class="timeline-company" data-th="บริษัท ซีแอลพี บิซิเนส แมเนจเมนท์ จำกัด | ปทุมธานี" data-en="CLP Business Management Company Limited | Pathum Thani">บริษัท ซีแอลพี บิซิเนส แมเนจเมนท์ จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date" data-th="พฤษภาคม 2562 - มิถุนายน 2564" data-en="May 2019 - June 2021">พฤษภาคม 2562 - มิถุนายน 2564</div>
                         <div class="timeline-description">
                             <ul>
-                                <li>บริหารโครงการ Implementation ระบบ ERP (Microsoft Dynamics AX D365) และดูแลการปรับปรุงระบบอย่างต่อเนื่อง</li>
-                                <li>ให้คำปรึกษาและแก้ไขปัญหาที่ซับซ้อนเกี่ยวกับระบบ ERP (Microsoft Dynamics AX D365 และ SAP Business One)</li>
-                                <li>จัดทำและบริหารแผนงานด้านไอทีให้สอดคล้องกับ KPI และมาตรฐาน ISO</li>
-                                <li>บริหารจัดการสต็อกอุปกรณ์ไอทีและวางแผนการจัดซื้อ</li>
+                                <li data-th="บริหารโครงการ Implementation ระบบ ERP (Microsoft Dynamics AX D365) และดูแลการปรับปรุงระบบอย่างต่อเนื่อง" data-en="Manage ERP implementation projects (Microsoft Dynamics AX D365) and oversee continuous system improvements">บริหารโครงการ Implementation ระบบ ERP (Microsoft Dynamics AX D365) และดูแลการปรับปรุงระบบอย่างต่อเนื่อง</li>
+                                <li data-th="ให้คำปรึกษาและแก้ไขปัญหาที่ซับซ้อนเกี่ยวกับระบบ ERP (Microsoft Dynamics AX D365 และ SAP Business One)" data-en="Provide consultation and resolve complex issues regarding ERP systems (Microsoft Dynamics AX D365 and SAP Business One)">ให้คำปรึกษาและแก้ไขปัญหาที่ซับซ้อนเกี่ยวกับระบบ ERP (Microsoft Dynamics AX D365 และ SAP Business One)</li>
+                                <li data-th="จัดทำและบริหารแผนงานด้านไอทีให้สอดคล้องกับ KPI และมาตรฐาน ISO" data-en="Prepare and manage IT plans aligned with KPIs and ISO standards">จัดทำและบริหารแผนงานด้านไอทีให้สอดคล้องกับ KPI และมาตรฐาน ISO</li>
+                                <li data-th="บริหารจัดการสต็อกอุปกรณ์ไอทีและวางแผนการจัดซื้อ" data-en="Manage IT equipment inventory and plan procurement">บริหารจัดการสต็อกอุปกรณ์ไอทีและวางแผนการจัดซื้อ</li>
                             </ul>
                             
                             <ul class="achievements-list">
-                                <li><strong>ผลงานสำคัญ:</strong> นำทีมดำเนินการติดตั้งและปรับแต่งระบบ ERP Microsoft Dynamics AX D365 จนสำเร็จตามกำหนดเวลาและงบประมาณ</li>
-                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบ Helpdesk เพื่อเพิ่มประสิทธิภาพในการแก้ไขปัญหาด้านไอทีและติดตามผลการดำเนินงาน</li>
+                                <li><strong data-th="ผลงานสำคัญ:" data-en="Key Achievement:">ผลงานสำคัญ:</strong> <span data-th="นำทีมดำเนินการติดตั้งและปรับแต่งระบบ ERP Microsoft Dynamics AX D365 จนสำเร็จตามกำหนดเวลาและงบประมาณ" data-en="Led team to successfully implement and customize Microsoft Dynamics AX D365 ERP system on time and within budget">นำทีมดำเนินการติดตั้งและปรับแต่งระบบ ERP Microsoft Dynamics AX D365 จนสำเร็จตามกำหนดเวลาและงบประมาณ</span></li>
+                                <li><strong data-th="ผลงานสำคัญ:" data-en="Key Achievement:">ผลงานสำคัญ:</strong> <span data-th="พัฒนาระบบ Helpdesk เพื่อเพิ่มประสิทธิภาพในการแก้ไขปัญหาด้านไอทีและติดตามผลการดำเนินงาน" data-en="Developed Helpdesk system to improve IT troubleshooting efficiency and track operations">พัฒนาระบบ Helpdesk เพื่อเพิ่มประสิทธิภาพในการแก้ไขปัญหาด้านไอทีและติดตามผลการดำเนินงาน</span></li>
                             </ul>
                         </div>
                     </div>
@@ -597,21 +632,21 @@
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 class="timeline-title">IT Support</h3>
-                        <div class="timeline-company">มาซูม่า (ประเทศไทย) จำกัด | ปทุมธานี</div>
-                        <div class="timeline-date">กรกฎาคม 2558 - เมษายน 2562</div>
+                        <h3 class="timeline-title" data-th="IT Support" data-en="IT Support">IT Support</h3>
+                        <div class="timeline-company" data-th="มาซูม่า (ประเทศไทย) จำกัด | ปทุมธานี" data-en="Mazuma (Thailand) Limited | Pathum Thani">มาซูม่า (ประเทศไทย) จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date" data-th="กรกฎาคม 2558 - เมษายน 2562" data-en="July 2015 - April 2019">กรกฎาคม 2558 - เมษายน 2562</div>
                         <div class="timeline-description">
                             <ul>
-                                <li>บริหารจัดการและดูแลระบบเครือข่าย รวมถึง Network, Internet, Firewall, NAS Server, Print Server ฯลฯ</li>
-                                <li>แก้ไขปัญหาและให้คำปรึกษาแก่ผู้ใช้งานในองค์กรเกี่ยวกับระบบ ERP และปัญหาด้านฮาร์ดแวร์และซอฟต์แวร์</li>
-                                <li>จัดทำและดำเนินการตามแผนงานด้านไอทีให้สอดคล้องกับ KPI และข้อกำหนดของมาตรฐาน ISO</li>
-                                <li>ออกแบบและดำเนินการฝึกอบรมพนักงานเกี่ยวกับการใช้งานคอมพิวเตอร์และโปรแกรม Microsoft Excel</li>
-                                <li>ดูแลระบบกล้องวงจรปิด การสำรองข้อมูล และการตรวจสอบภาพย้อนหลัง</li>
+                                <li data-th="บริหารจัดการและดูแลระบบเครือข่าย รวมถึง Network, Internet, Firewall, NAS Server, Print Server ฯลฯ" data-en="Manage and maintain network systems including Network, Internet, Firewall, NAS Server, Print Server, etc.">บริหารจัดการและดูแลระบบเครือข่าย รวมถึง Network, Internet, Firewall, NAS Server, Print Server ฯลฯ</li>
+                                <li data-th="แก้ไขปัญหาและให้คำปรึกษาแก่ผู้ใช้งานในองค์กรเกี่ยวกับระบบ ERP และปัญหาด้านฮาร์ดแวร์และซอฟต์แวร์" data-en="Troubleshoot and provide consultation to users regarding ERP systems and hardware/software issues">แก้ไขปัญหาและให้คำปรึกษาแก่ผู้ใช้งานในองค์กรเกี่ยวกับระบบ ERP และปัญหาด้านฮาร์ดแวร์และซอฟต์แวร์</li>
+                                <li data-th="จัดทำและดำเนินการตามแผนงานด้านไอทีให้สอดคล้องกับ KPI และข้อกำหนดของมาตรฐาน ISO" data-en="Prepare and execute IT plans aligned with KPIs and ISO standard requirements">จัดทำและดำเนินการตามแผนงานด้านไอทีให้สอดคล้องกับ KPI และข้อกำหนดของมาตรฐาน ISO</li>
+                                <li data-th="ออกแบบและดำเนินการฝึกอบรมพนักงานเกี่ยวกับการใช้งานคอมพิวเตอร์และโปรแกรม Microsoft Excel" data-en="Design and conduct employee training on computer usage and Microsoft Excel">ออกแบบและดำเนินการฝึกอบรมพนักงานเกี่ยวกับการใช้งานคอมพิวเตอร์และโปรแกรม Microsoft Excel</li>
+                                <li data-th="ดูแลระบบกล้องวงจรปิด การสำรองข้อมูล และการตรวจสอบภาพย้อนหลัง" data-en="Maintain CCTV systems, data backup, and video playback review">ดูแลระบบกล้องวงจรปิด การสำรองข้อมูล และการตรวจสอบภาพย้อนหลัง</li>
                             </ul>
                             
                             <ul class="achievements-list">
-                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาระบบเครือข่ายให้มีเสถียรภาพและความปลอดภัยสูงขึ้น ทำให้ลดเวลาการหยุดชะงักของระบบลงได้ 75%</li>
-                                <li><strong>ผลงานสำคัญ:</strong> ปรับปรุงระบบสำรองข้อมูลให้มีประสิทธิภาพและเชื่อถือได้มากขึ้น</li>
+                                <li><strong data-th="ผลงานสำคัญ:" data-en="Key Achievement:">ผลงานสำคัญ:</strong> <span data-th="พัฒนาระบบเครือข่ายให้มีเสถียรภาพและความปลอดภัยสูงขึ้น ทำให้ลดเวลาการหยุดชะงักของระบบลงได้ 75%" data-en="Improved network system stability and security, reducing system downtime by 75%">พัฒนาระบบเครือข่ายให้มีเสถียรภาพและความปลอดภัยสูงขึ้น ทำให้ลดเวลาการหยุดชะงักของระบบลงได้ 75%</span></li>
+                                <li><strong data-th="ผลงานสำคัญ:" data-en="Key Achievement:">ผลงานสำคัญ:</strong> <span data-th="ปรับปรุงระบบสำรองข้อมูลให้มีประสิทธิภาพและเชื่อถือได้มากขึ้น" data-en="Improved data backup system efficiency and reliability">ปรับปรุงระบบสำรองข้อมูลให้มีประสิทธิภาพและเชื่อถือได้มากขึ้น</span></li>
                             </ul>
                         </div>
                     </div>
@@ -619,20 +654,20 @@
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 class="timeline-title">IT Support</h3>
-                        <div class="timeline-company">เภตรา กรุ๊ป จำกัด | ปทุมธานี</div>
-                        <div class="timeline-date">ตุลาคม 2557 - มิถุนายน 2558</div>
+                        <h3 class="timeline-title" data-th="IT Support" data-en="IT Support">IT Support</h3>
+                        <div class="timeline-company" data-th="เภตรา กรุ๊ป จำกัด | ปทุมธานี" data-en="Phetra Group Company Limited | Pathum Thani">เภตรา กรุ๊ป จำกัด | ปทุมธานี</div>
+                        <div class="timeline-date" data-th="ตุลาคม 2557 - มิถุนายน 2558" data-en="October 2014 - June 2015">ตุลาคม 2557 - มิถุนายน 2558</div>
                         <div class="timeline-description">
                             <ul>
-                                <li>ดูแลและบำรุงรักษาระบบเครือข่ายและคอมพิวเตอร์ทั้งหมด 441 เครื่อง ใน 10 สาขาของกลุ่มบริษัท</li>
-                                <li>ให้บริการและแก้ไขปัญหาทางด้านเทคนิคแก่ผู้ใช้งานทั่วทั้งองค์กร</li>
-                                <li>วางแผนและดำเนินการบำรุงรักษาเชิงป้องกันเพื่อให้ระบบมีความเสถียรอยู่เสมอ</li>
-                                <li>ฝึกอบรมและพัฒนาความรู้ด้านคอมพิวเตอร์และระบบสารสนเทศให้กับพนักงาน</li>
+                                <li data-th="ดูแลและบำรุงรักษาระบบเครือข่ายและคอมพิวเตอร์ทั้งหมด 441 เครื่อง ใน 10 สาขาของกลุ่มบริษัท" data-en="Maintain network systems and 441 computers across 10 branches of the company group">ดูแลและบำรุงรักษาระบบเครือข่ายและคอมพิวเตอร์ทั้งหมด 441 เครื่อง ใน 10 สาขาของกลุ่มบริษัท</li>
+                                <li data-th="ให้บริการและแก้ไขปัญหาทางด้านเทคนิคแก่ผู้ใช้งานทั่วทั้งองค์กร" data-en="Provide technical support and troubleshooting services to users throughout the organization">ให้บริการและแก้ไขปัญหาทางด้านเทคนิคแก่ผู้ใช้งานทั่วทั้งองค์กร</li>
+                                <li data-th="วางแผนและดำเนินการบำรุงรักษาเชิงป้องกันเพื่อให้ระบบมีความเสถียรอยู่เสมอ" data-en="Plan and execute preventive maintenance to ensure system stability">วางแผนและดำเนินการบำรุงรักษาเชิงป้องกันเพื่อให้ระบบมีความเสถียรอยู่เสมอ</li>
+                                <li data-th="ฝึกอบรมและพัฒนาความรู้ด้านคอมพิวเตอร์และระบบสารสนเทศให้กับพนักงาน" data-en="Train and develop employees' knowledge in computers and information systems">ฝึกอบรมและพัฒนาความรู้ด้านคอมพิวเตอร์และระบบสารสนเทศให้กับพนักงาน</li>
                             </ul>
                             
                             <ul class="achievements-list">
-                                <li><strong>ผลงานสำคัญ:</strong> บริหารจัดการระบบเครือข่ายและคอมพิวเตอร์ 10 สาขาอย่างมีประสิทธิภาพ แม้มีทรัพยากรบุคคลจำกัด</li>
-                                <li><strong>ผลงานสำคัญ:</strong> พัฒนาชุดคู่มือการใช้งานระบบสารสนเทศเพื่อให้ผู้ใช้งานสามารถแก้ไขปัญหาเบื้องต้นได้ด้วยตนเอง</li>
+                                <li><strong data-th="ผลงานสำคัญ:" data-en="Key Achievement:">ผลงานสำคัญ:</strong> <span data-th="บริหารจัดการระบบเครือข่ายและคอมพิวเตอร์ 10 สาขาอย่างมีประสิทธิภาพ แม้มีทรัพยากรบุคคลจำกัด" data-en="Efficiently managed network systems and computers across 10 branches despite limited human resources">บริหารจัดการระบบเครือข่ายและคอมพิวเตอร์ 10 สาขาอย่างมีประสิทธิภาพ แม้มีทรัพยากรบุคคลจำกัด</span></li>
+                                <li><strong data-th="ผลงานสำคัญ:" data-en="Key Achievement:">ผลงานสำคัญ:</strong> <span data-th="พัฒนาชุดคู่มือการใช้งานระบบสารสนเทศเพื่อให้ผู้ใช้งานสามารถแก้ไขปัญหาเบื้องต้นได้ด้วยตนเอง" data-en="Developed information system user manuals enabling users to troubleshoot basic issues independently">พัฒนาชุดคู่มือการใช้งานระบบสารสนเทศเพื่อให้ผู้ใช้งานสามารถแก้ไขปัญหาเบื้องต้นได้ด้วยตนเอง</span></li>
                             </ul>
                         </div>
                     </div>
@@ -642,18 +677,18 @@
         
         <!-- Education Section -->
         <section id="education" class="section">
-            <h2 class="section-title">การศึกษา</h2>
+            <h2 class="section-title" data-th="การศึกษา" data-en="Education">การศึกษา</h2>
             <div class="education-grid">
                 <div class="education-item">
-                    <h3 class="education-title">วิทยาศาสตรบัณฑิต (วท.บ.)</h3>
-                    <div class="education-school">มหาวิทยาลัยราชภัฏสวนดุสิต</div>
-                    <div class="education-program">คณะวิทยาศาสตร์ สาขาวิทยาการคอมพิวเตอร์</div>
+                    <h3 class="education-title" data-th="วิทยาศาสตรบัณฑิต (วท.บ.)" data-en="Bachelor of Science (B.Sc.)">วิทยาศาสตรบัณฑิต (วท.บ.)</h3>
+                    <div class="education-school" data-th="มหาวิทยาลัยราชภัฏสวนดุสิต" data-en="Suan Dusit University">มหาวิทยาลัยราชภัฏสวนดุสิต</div>
+                    <div class="education-program" data-th="คณะวิทยาศาสตร์ สาขาวิทยาการคอมพิวเตอร์" data-en="Faculty of Science, Computer Science">คณะวิทยาศาสตร์ สาขาวิทยาการคอมพิวเตอร์</div>
                     <div class="education-year">2550</div>
                 </div>
                 
                 <div class="education-item">
-                    <h3 class="education-title">มัธยมศึกษาตอนปลาย</h3>
-                    <div class="education-school">โรงเรียนปทุมวิไล</div>
+                    <h3 class="education-title" data-th="มัธยมศึกษาตอนปลาย" data-en="High School">มัธยมศึกษาตอนปลาย</h3>
+                    <div class="education-school" data-th="โรงเรียนปทุมวิไล" data-en="Pathumwilai School">โรงเรียนปทุมวิไล</div>
                     <div class="education-year">2547</div>
                 </div>
             </div>
@@ -661,34 +696,34 @@
         
         <!-- Certifications Section -->
         <section id="certifications" class="section">
-            <h2 class="section-title">ประกาศนียบัตรและการอบรม</h2>
+            <h2 class="section-title" data-th="ประกาศนียบัตรและการอบรม" data-en="Certifications & Training">ประกาศนียบัตรและการอบรม</h2>
             <ul class="certifications-list">
                 <li class="certification-item">
-                    <div class="certification-title">วิเคราะห์ข้อมูลองค์กรด้วย Power BI</div>
+                    <div class="certification-title" data-th="วิเคราะห์ข้อมูลองค์กรด้วย Power BI" data-en="Business Data Analytics with Power BI">วิเคราะห์ข้อมูลองค์กรด้วย Power BI</div>
                     <div class="certification-org">Future Skill</div>
                     <div class="certification-year">2566</div>
                 </li>
                 
                 <li class="certification-item">
-                    <div class="certification-title">เจาะลึกการใช้ Excel เพื่อธุรกิจแบบมืออาชีพ</div>
+                    <div class="certification-title" data-th="เจาะลึกการใช้ Excel เพื่อธุรกิจแบบมืออาชีพ" data-en="Advanced Excel for Business Professionals">เจาะลึกการใช้ Excel เพื่อธุรกิจแบบมืออาชีพ</div>
                     <div class="certification-org">Future Skill</div>
                     <div class="certification-year">2566</div>
                 </li>
                 
                 <li class="certification-item">
-                    <div class="certification-title">Data Analytics for Business</div>
+                    <div class="certification-title" data-th="Data Analytics for Business" data-en="Data Analytics for Business">Data Analytics for Business</div>
                     <div class="certification-org">Future Skill</div>
                     <div class="certification-year">2566</div>
                 </li>
                 
                 <li class="certification-item">
-                    <div class="certification-title">ISO 9001:2015 / GMP Asian / HALAL / GMP อ.ย.</div>
+                    <div class="certification-title" data-th="ISO 9001:2015 / GMP Asian / HALAL / GMP อ.ย." data-en="ISO 9001:2015 / GMP Asian / HALAL / GMP FDA">ISO 9001:2015 / GMP Asian / HALAL / GMP อ.ย.</div>
                     <div class="certification-year">2565</div>
                 </li>
                 
                 <li class="certification-item">
-                    <div class="certification-title">DMS IT Module</div>
-                    <div class="certification-org">บริษัท เมอร์เซเดส-เบนซ์ (ประเทศไทย)</div>
+                    <div class="certification-title" data-th="DMS IT Module" data-en="DMS IT Module">DMS IT Module</div>
+                    <div class="certification-org" data-th="บริษัท เมอร์เซเดส-เบนซ์ (ประเทศไทย)" data-en="Mercedes-Benz (Thailand) Limited">บริษัท เมอร์เซเดส-เบนซ์ (ประเทศไทย)</div>
                     <div class="certification-year">2558</div>
                 </li>
             </ul>
@@ -696,13 +731,12 @@
         
         <!-- Projects Section -->
         <section id="projects" class="section">
-            <h2 class="section-title">ผลงานและโครงการสำคัญ</h2>
+            <h2 class="section-title" data-th="ผลงานและโครงการสำคัญ" data-en="Key Projects & Portfolio">ผลงานและโครงการสำคัญ</h2>
             <div class="projects-list">
                 <div class="project-item">
-                    <!-- <img src="/api/profile.jpg" alt="ระบบ Mobile Approval" class="project-img"> -->
                     <div class="project-content">
-                        <h3 class="project-title">ระบบอนุมัติเอกสารบนมือถือ</h3>
-                        <p>พัฒนาแอปพลิเคชันสำหรับการอนุมัติเอกสารต่างๆ ภายในองค์กร เช่น ใบลา ใบขอสั่งซื้อ เพื่อเพิ่มความสะดวกรวดเร็วและลดการใช้กระดาษ</p>
+                        <h3 class="project-title" data-th="ระบบอนุมัติเอกสารบนมือถือ" data-en="Mobile Document Approval System">ระบบอนุมัติเอกสารบนมือถือ</h3>
+                        <p data-th="พัฒนาแอปพลิเคชันสำหรับการอนุมัติเอกสารต่างๆ ภายในองค์กร เช่น ใบลา ใบขอสั่งซื้อ เพื่อเพิ่มความสะดวกรวดเร็วและลดการใช้กระดาษ" data-en="Developed mobile application for document approval processes within the organization, such as leave requests and purchase orders, to enhance convenience and reduce paper usage">พัฒนาแอปพลิเคชันสำหรับการอนุมัติเอกสารต่างๆ ภายในองค์กร เช่น ใบลา ใบขอสั่งซื้อ เพื่อเพิ่มความสะดวกรวดเร็วและลดการใช้กระดาษ</p>
                         <div class="tags">
                             <span class="tag">Mobile App</span>
                             <span class="tag">Paperless</span>
@@ -712,10 +746,9 @@
                 </div>
                 
                 <div class="project-item">
-                    <!-- <img src="/api/placeholder/400/180" alt="ERP Implementation" class="project-img"> -->
                     <div class="project-content">
-                        <h3 class="project-title">การติดตั้งระบบ ERP</h3>
-                        <p>บริหารโครงการติดตั้งและปรับแต่งระบบ ERP (Microsoft Dynamics 365) เพื่อเชื่อมโยงข้อมูลและกระบวนการทำงานทั้งหมดขององค์กร</p>
+                        <h3 class="project-title" data-th="การติดตั้งระบบ ERP" data-en="ERP System Implementation">การติดตั้งระบบ ERP</h3>
+                        <p data-th="บริหารโครงการติดตั้งและปรับแต่งระบบ ERP (Microsoft Dynamics 365) เพื่อเชื่อมโยงข้อมูลและกระบวนการทำงานทั้งหมดขององค์กร" data-en="Managed ERP system implementation and customization project (Microsoft Dynamics 365) to integrate all organizational data and business processes">บริหารโครงการติดตั้งและปรับแต่งระบบ ERP (Microsoft Dynamics 365) เพื่อเชื่อมโยงข้อมูลและกระบวนการทำงานทั้งหมดขององค์กร</p>
                         <div class="tags">
                             <span class="tag">ERP</span>
                             <span class="tag">Microsoft Dynamics</span>
@@ -725,10 +758,9 @@
                 </div>
                 
                 <div class="project-item">
-                 <!--   <img src="/api/placeholder/400/180" alt="Automated Notification System" class="project-img"> -->
                     <div class="project-content">
-                        <h3 class="project-title">ระบบแจ้งเตือนอัตโนมัติ</h3>
-                        <p>พัฒนาระบบแจ้งเตือนอัตโนมัติสำหรับการติดตามวันหมดอายุของผลิตภัณฑ์ยา การต่ออายุใบอนุญาต และกำหนดการสำคัญต่างๆ</p>
+                        <h3 class="project-title" data-th="ระบบแจ้งเตือนอัตโนมัติ" data-en="Automated Notification System">ระบบแจ้งเตือนอัตโนมัติ</h3>
+                        <p data-th="พัฒนาระบบแจ้งเตือนอัตโนมัติสำหรับการติดตามวันหมดอายุของผลิตภัณฑ์ยา การต่ออายุใบอนุญาต และกำหนดการสำคัญต่างๆ" data-en="Developed automated notification system for tracking pharmaceutical product expiration dates, license renewals, and important schedules">พัฒนาระบบแจ้งเตือนอัตโนมัติสำหรับการติดตามวันหมดอายุของผลิตภัณฑ์ยา การต่ออายุใบอนุญาต และกำหนดการสำคัญต่างๆ</p>
                         <div class="tags">
                             <span class="tag">Automation</span>
                             <span class="tag">Notification</span>
@@ -738,10 +770,9 @@
                 </div>
                 
                 <div class="project-item">
-                <!--    <img src="/api/placeholder/400/180" alt="Network Infrastructure" class="project-img"> -->
                     <div class="project-content">
-                        <h3 class="project-title">การปรับปรุงโครงสร้างพื้นฐานเครือข่าย</h3>
-                        <p>วางแผนและดำเนินการปรับปรุงโครงสร้างพื้นฐานด้านเครือข่ายขององค์กร เพื่อรองรับการเติบโตและเพิ่มความปลอดภัยของข้อมูล</p>
+                        <h3 class="project-title" data-th="การปรับปรุงโครงสร้างพื้นฐานเครือข่าย" data-en="Network Infrastructure Improvement">การปรับปรุงโครงสร้างพื้นฐานเครือข่าย</h3>
+                        <p data-th="วางแผนและดำเนินการปรับปรุงโครงสร้างพื้นฐานด้านเครือข่ายขององค์กร เพื่อรองรับการเติบโตและเพิ่มความปลอดภัยของข้อมูล" data-en="Planned and executed organizational network infrastructure improvements to support growth and enhance data security">วางแผนและดำเนินการปรับปรุงโครงสร้างพื้นฐานด้านเครือข่ายขององค์กร เพื่อรองรับการเติบโตและเพิ่มความปลอดภัยของข้อมูล</p>
                         <div class="tags">
                             <span class="tag">Network</span>
                             <span class="tag">Security</span>
@@ -756,14 +787,53 @@
     <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <p>© 2025 สกลวรรธน์ สิริรัตนาธรสกุล - ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</p>
-            <p>พร้อมที่จะนำความรู้และประสบการณ์มาพัฒนาองค์กรของคุณ</p>
+            <p data-th="© 2025 สกลวรรธน์ สิริรัตนาธรสกุล - ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ" data-en="© 2025 Sakonwan Siriratanathornsakul - IT Manager">© 2025 สกลวรรธน์ สิริรัตนาธรสกุล - ผู้จัดการฝ่ายเทคโนโลยีสารสนเทศ</p>
+            <p data-th="พร้อมที่จะนำความรู้และประสบการณ์มาพัฒนาองค์กรของคุณ" data-en="Ready to bring knowledge and experience to develop your organization">พร้อมที่จะนำความรู้และประสบการณ์มาพัฒนาองค์กรของคุณ</p>
         </div>
     </footer>
     
     <script>
-        // Simple navigation highlighting
-        document.addEventListener('DOMContentLoaded', function() {
+        // Language translation system
+        const translations = {
+            th: {},
+            en: {}
+        };
+        
+        let currentLang = 'th';
+        
+        // Initialize translation data
+        function initTranslations() {
+            document.querySelectorAll('[data-th]').forEach(element => {
+                translations.th[element.textContent.trim()] = element.getAttribute('data-th');
+                translations.en[element.textContent.trim()] = element.getAttribute('data-en');
+            });
+        }
+        
+        // Switch language function
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-th][data-en]').forEach(element => {
+                const thText = element.getAttribute('data-th');
+                const enText = element.getAttribute('data-en');
+                element.textContent = lang === 'th' ? thText : enText;
+            });
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+        
+        // Navigation highlighting
+        function initNavigation() {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-links a');
             
@@ -783,6 +853,20 @@
                     if(link.getAttribute('href').substring(1) === current) {
                         link.classList.add('active');
                     }
+                });
+            });
+        }
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initTranslations();
+            initNavigation();
+            
+            // Add event listeners to language buttons
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
                 });
             });
         });
